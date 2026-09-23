@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: API de seguranca da central sentinela
+  description:   API destinada ao controle do sistema central sentinela da empresa Oroscorp
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: nathanluna@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.4.26
+externalDocs: 
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://
+paths:
+  /v1/oroscorp/sentinel-control/setores:
+    post:
+      tags:
+        - Setor
+      summary: Adiciona um novo setor
+      description: Endpoint para enviar os dados do setor a serem cadastrados
+      requestBody:
+        description: JSON contendo os dados do novo Setor a ser inserido no sistema
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Setor'
+        required: true
+      responses:
+        '201':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '415':
+          description: Invalid Content-Type
+        '500':
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Filme
+      summary: Lista todos os Filmes
+      description: Listagem de todos os filmes que foram cadastrados no sistema
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Filme'          
+        '404':
+          description: Not Found
+        '500':
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/senai/locadora/filme/{id}:
+    get:
+      tags:
+        - Filme
+      summary: Busca um Filme pelo ID
+      description: Retorna um Filme utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Filme
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Filme'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not Found
+        '500':
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+    put:
+      tags:
+        - Filme
+      summary: Atualizando um Filme existente
+      description: Buscar e atualizar um filme utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Filme
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Filme'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not Found
+        '415':
+          description: Invalid content-Type
+        '500':
+          description: Error Internal Server(CONTROLLER/MODEL)    
+
+    delete:
+      tags:
+        - Filme
+      summary: Delete Filme
+      description: Endpoint para deletar um Filme existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID para buscar o filme
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Not Found
+        '500':
+          description: Error Internal Server (CONTROLLER/MODEL)
+components:
+  schemas:
+    Setor:
+      required:
+        - nome
+        - descricao
+        - local
+        - duracao
+        - capa
+      type: object
+      properties:
+        id:
+          type: integer
+        nome: 
+          type: string
+        sinopse:
+          type: string
+        data_lancamento:
+          type: string
+          example: "2026-01-01"
+        duracao:
+          type: string
+          example: "01:00:00"
+        capa:
+          type: string
+        valor:
+          type: string
+          example: "10.5"
+        avaliacao: 
+          type: integer
+  requestBodies:
+    Filme:
+      description: Objeto que deve ser enviado no Body das requisicoes
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Setor'
+    
