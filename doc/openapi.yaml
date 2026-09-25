@@ -57,8 +57,7 @@ paths:
           description: Error Internal server (CONTROLLER/MODEL)
   /v1/senai/locadora/filme/{id}:
     get:
-      tags:
-        - Filme
+ 
       summary: Busca um Filme pelo ID
       description: Retorna um Filme utilizando o ID do mesmo
       parameters:
@@ -143,30 +142,22 @@ components:
       required:
         - nome
         - descricao
+        - foto
         - local
-        - duracao
-        - capa
       type: object
       properties:
         id:
           type: integer
         nome: 
           type: string
-        sinopse:
+        descricao:
           type: string
-        data_lancamento:
+        foto:
           type: string
-          example: "2026-01-01"
-        duracao:
+          example: "URL da imagem do setor"
+        local:
           type: string
-          example: "01:00:00"
-        capa:
-          type: string
-        valor:
-          type: string
-          example: "10.5"
-        avaliacao: 
-          type: integer
+          example: "piso 1, sala 2"
   requestBodies:
     Filme:
       description: Objeto que deve ser enviado no Body das requisicoes
