@@ -13,16 +13,16 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://
+  - url: http://localhost:8080
 paths:
 
-# NIVEL DE ACESSO
+  # NIVEL DE ACESSO
   /v1/oroscorp/nivel-acesso:
     post:
       tags:
         - nivel de acesso
       summary: Adiciona um novo nivel de acesso
-      description: Endpoint para enviar os dados do nivel de acesso a serem cadastrados
+      description: Endpoint para enviar os dados do nivel de acesso a ser cadastrado
       requestBody:
         description: JSON contendo os dados do novo nivel de acesso a ser inserido no sistema
         content:
@@ -53,8 +53,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/NivelAcesso"
-        "400":
-          description: ID inválido fornecido
         "404":
           description: Not Found
         "500":
@@ -94,7 +92,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of nivel de acesso to return
+          description: ID do nivel de acesso a ser atualizado
           required: true
           schema:
             type: integer
@@ -117,7 +115,6 @@ paths:
           description: Invalid content-Type
         "500":
           description: Error Internal Server(CONTROLLER/MODEL)
-
     delete:
       tags:
         - nivel de acesso
@@ -126,7 +123,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID para buscar o usuario
+          description: ID do nivel de acesso a ser deletado
           required: true
           schema:
             type: integer
@@ -141,8 +138,7 @@ paths:
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
 
-
-   # STATUS DA CONTA
+  # STATUS DA CONTA
   /v1/oroscorp/status-conta:
     post:
       tags:
@@ -165,12 +161,11 @@ paths:
           description: Invalid Content-Type
         "500":
           description: Error Internal server (CONTROLLER/MODEL)
-
     get:
       tags:
         - status da conta
-      summary: Lista todos os statuses de conta
-      description: Listagem de todos os statuses de conta  que foram cadastrados no sistema
+      summary: Lista todos os status de conta
+      description: Listagem de todos os status de conta que foram cadastrados no sistema
       responses:
         "200":
           description: successful operation
@@ -180,13 +175,10 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/StatusConta"
-        "400":
-          description: ID inválido fornecido
         "404":
           description: Not Found
         "500":
           description: Error Internal server (CONTROLLER/MODEL)
-
   /v1/oroscorp/status-conta/{id}:
     get:
       tags:
@@ -214,8 +206,6 @@ paths:
           description: Not Found
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
-
-
     put:
       tags:
         - status da conta
@@ -224,7 +214,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of status de conta to return
+          description: ID do status de conta a ser atualizado
           required: true
           schema:
             type: integer
@@ -247,7 +237,6 @@ paths:
           description: Invalid content-Type
         "500":
           description: Error Internal Server(CONTROLLER/MODEL)
-
     delete:
       tags:
         - status da conta
@@ -256,7 +245,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID para buscar o status de conta
+          description: ID do status de conta a ser deletado
           required: true
           schema:
             type: integer
@@ -271,9 +260,7 @@ paths:
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
 
-
-
-    # USUARIO
+  # USUARIO
   /v1/oroscorp/usuario:
     post:
       tags:
@@ -310,8 +297,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Usuario"
-        "400":
-          description: ID inválido fornecido
         "404":
           description: Not Found
         "500":
@@ -351,7 +336,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of usuario to return
+          description: ID do usuario a ser atualizado
           required: true
           schema:
             type: integer
@@ -374,7 +359,6 @@ paths:
           description: Invalid content-Type
         "500":
           description: Error Internal Server(CONTROLLER/MODEL)
-
     delete:
       tags:
         - Usuario
@@ -383,7 +367,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID para buscar o usuario
+          description: ID do usuario a ser deletado
           required: true
           schema:
             type: integer
@@ -398,62 +382,47 @@ paths:
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
 
-      #Responsavel
+  # RESPONSAVEL
   /v1/oroscorp/responsavel:
     post:
       tags:
         - Responsavel
-      summary: Busca um responsavel pelo ID
-      description: Retorna um responsavel utilizando o ID do mesmo
-      parameters:
-        - name: id
-          in: path
-          description: ID para realizar a busca do Responsavel
-          required: true
-          schema:
-            type: integer
-            format: int64
+      summary: Adiciona um novo responsavel
+      description: Endpoint para enviar os dados do responsavel a serem cadastrados
+      requestBody:
+        description: JSON contendo os dados do novo Responsavel a ser inserido no sistema
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Responsavel"
+        required: true
       responses:
-        "200": 
-          description: successful operation
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Responsavel"
+        "201":
+          description: Successful operation
         "400":
-          description: Invalid ID supplied
-        "404":
-          description: Not Found
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
         "500":
-          description: Error Internal Server (CONTROLLER/MODEL)
-
+          description: Error Internal server (CONTROLLER/MODEL)
     get:
       tags:
         - Responsavel
-      summary: Busca um Responsavel pelo ID
-      description: Retorna um Responsavel utilizando o ID do mesmo
-      parameters:
-        - name: id
-          in: path
-          description: ID para realizar a busca do Responsavel
-          required: true
-          schema:
-            type: integer
-            format: int64
+      summary: Lista todos os Responsaveis
+      description: Listagem de todos os responsaveis que foram cadastrados no sistema
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Responsavel"
-        "400":
-          description: Invalid ID supplied
+                type: array
+                items:
+                  $ref: "#/components/schemas/Responsavel"
         "404":
           description: Not Found
         "500":
-          description: Error Internal Server (CONTROLLER/MODEL)
-
+          description: Error Internal server (CONTROLLER/MODEL)
   /v1/oroscorp/responsavel/{id}:
     get:
       tags:
@@ -481,7 +450,6 @@ paths:
           description: Not Found
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
-
     put:
       tags:
         - Responsavel
@@ -490,7 +458,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID of responsavel to return
+          description: ID do responsavel a ser atualizado
           required: true
           schema:
             type: integer
@@ -513,7 +481,6 @@ paths:
           description: Invalid content-Type
         "500":
           description: Error Internal Server(CONTROLLER/MODEL)
-
     delete:
       tags:
         - Responsavel
@@ -522,7 +489,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID para buscar o responsavel
+          description: ID do responsavel a ser deletado
           required: true
           schema:
             type: integer
@@ -542,7 +509,7 @@ paths:
     post:
       tags:
         - Administrador
-      summary: Adiciona um novo administrador 
+      summary: Adiciona um novo administrador
       description: Endpoint para adicionar um novo administrador
       requestBody:
         description: Dados para adicionar um novo administrador
@@ -556,9 +523,10 @@ paths:
           description: Administrador criado com sucesso
         "400":
           description: Requisição inválida
+        "415":
+          description: Tipo de conteúdo inválido
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
-    
     get:
       tags:
         - Administrador
@@ -573,13 +541,10 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Administrador"
-        "400":
-          description: ID inválido fornecido
         "404":
           description: Não encontrado
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
-
   /v1/oroscorp/administrador/{id}:
     get:
       tags:
@@ -607,7 +572,6 @@ paths:
           description: Não encontrado
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
-
     put:
       tags:
         - Administrador
@@ -639,7 +603,6 @@ paths:
           description: Tipo de conteúdo inválido
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
-
     delete:
       tags:
         - Administrador
@@ -648,7 +611,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID para buscar o administrador
+          description: ID do administrador a ser deletado
           required: true
           schema:
             type: integer
@@ -661,132 +624,131 @@ paths:
         "404":
           description: Não encontrado
         "500":
-          description: Error Internal Server (CONTROLLER/MODEL)   
+          description: Error Internal Server (CONTROLLER/MODEL)
 
-
-    # Cargo
+  # CARGO
   /v1/oroscorp/cargo:
-      post:
-        tags:
-          - Cargo
-        summary: Adiciona um novo cargo
-        description: Endpoint para adicionar um novo cargo
-        requestBody:
-          description: Dados para adicionar um novo cargo
+    post:
+      tags:
+        - Cargo
+      summary: Adiciona um novo cargo
+      description: Endpoint para adicionar um novo cargo
+      requestBody:
+        description: Dados para adicionar um novo cargo
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cargo"
+        required: true
+      responses:
+        "201":
+          description: Cargo criado com sucesso
+        "400":
+          description: Requisição inválida
+        "415":
+          description: Tipo de conteúdo inválido
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Cargo
+      summary: Lista todos os cargos
+      description: Listagem de todos os cargos cadastrados no sistema
+      responses:
+        "200":
+          description: Operação bem-sucedida
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Cargo"
-          required: true
-        responses:
-          "201":
-            description: Cargo criado com sucesso
-          "400":
-            description: Requisição inválida
-          "500":
-            description: Error Internal Server (CONTROLLER/MODEL)
-      get:
-        tags:
-          - Cargo
-        summary: Lista todos os cargos
-        description: Listagem de todos os cargos cadastrados no sistema
-        responses:
-          "200":
-            description: Operação bem-sucedida
-            content:
-              application/json:
-                schema:
-                  type: array
-                  items:
-                    $ref: "#/components/schemas/Cargo"
-          "400":
-            description: ID inválido fornecido
-          "404":
-            description: Não encontrado
-          "500":
-            description: Error Internal Server (CONTROLLER/MODEL)
-  /v1/oroscorp/cargo/{id}:
-      get:
-        tags:
-          - Cargo
-        summary: Busca um cargo pelo ID
-        description: Retorna um cargo utilizando o ID do mesmo
-        parameters:
-          - name: id
-            in: path
-            description: ID para realizar a busca do Cargo
-            required: true
-            schema:
-              type: integer
-              format: int64
-        responses:
-          "200":
-            description: Operação bem-sucedida
-            content:
-              application/json:
-                schema:
+                type: array
+                items:
                   $ref: "#/components/schemas/Cargo"
-          "400":
-            description: ID inválido fornecido
-          "404":
-            description: Não encontrado
-          "500":
-            description: Error Internal Server (CONTROLLER/MODEL)
-      put:
-        tags:
-          - Cargo
-        summary: Atualiza um cargo existente
-        description: Buscar e atualizar um cargo utilizando o ID
-        parameters:
-          - name: id
-            in: path
-            description: ID do cargo a ser atualizado
-            required: true
-            schema:
-              type: integer
-              format: int64
-        requestBody:
-          description: Dados para atualizar um Cargo
+        "404":
+          description: Não encontrado
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+  /v1/oroscorp/cargo/{id}:
+    get:
+      tags:
+        - Cargo
+      summary: Busca um cargo pelo ID
+      description: Retorna um cargo utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Cargo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Operação bem-sucedida
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Cargo"
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Não encontrado
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Cargo
+      summary: Atualiza um cargo existente
+      description: Buscar e atualizar um cargo utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do cargo a ser atualizado
           required: true
-        responses:
-          "200":
-            description: Operação bem-sucedida
-          "400":
-            description: ID inválido fornecido
-          "404":
-            description: Não encontrado
-          "415":
-            description: Tipo de conteúdo inválido
-          "500":
-            description: Error Internal Server (CONTROLLER/MODEL)
-      delete:
-        tags:
-          - Cargo
-        summary: Deleta um cargo existente
-        description: Endpoint para deletar um cargo existente utilizando o ID
-        parameters:
-          - name: id
-            in: path
-            description: ID para buscar o cargo
-            required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Cargo
+        content:
+          application/json:
             schema:
-              type: integer
-              format: int64
-        responses:
-          "200":
-            description: Operação bem-sucedida
-          "400":
-            description: ID inválido fornecido
-          "404":
-            description: Não encontrado
-          "500":
-            description: Error Internal Server (CONTROLLER/MODEL)
+              $ref: "#/components/schemas/Cargo"
+        required: true
+      responses:
+        "200":
+          description: Operação bem-sucedida
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Não encontrado
+        "415":
+          description: Tipo de conteúdo inválido
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Cargo
+      summary: Deleta um cargo existente
+      description: Endpoint para deletar um cargo existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do cargo a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Operação bem-sucedida
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Não encontrado
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
 
-    # Funcionarios
+  # FUNCIONARIO
   /v1/oroscorp/funcionario:
     post:
       tags:
@@ -805,8 +767,10 @@ paths:
           description: Funcionario criado com sucesso
         "400":
           description: Requisição inválida
+        "415":
+          description: Tipo de conteúdo inválido
         "500":
-          description: Error Internal Server (CONTROLLER/MODEL) 
+          description: Error Internal Server (CONTROLLER/MODEL)
     get:
       tags:
         - Funcionario
@@ -821,8 +785,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Funcionario"
-        "400":
-          description: ID inválido fornecido
         "404":
           description: Não encontrado
         "500":
@@ -847,7 +809,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Funcionario"  
+                $ref: "#/components/schemas/Funcionario"
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Não encontrado
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
     put:
       tags:
         - Funcionario
@@ -887,7 +855,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: ID para buscar o funcionario
+          description: ID do funcionario a ser deletado
           required: true
           schema:
             type: integer
@@ -902,40 +870,1830 @@ paths:
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
 
-   # Setor_funcionario
-  /v1/oroscorp/setor_funcionario:
+  # SETOR_FUNCIONARIO
+  /v1/oroscorp/setor-funcionario:
     post:
-      tag:
-       - Setor_funcionario
-      summary:
-        recebe o id de setor e funcionarios 
-      descripition:
-        rota intermediaria de setor e funcionario 
+      tags:
+        - Setor Funcionario
+      summary: Vincula um funcionario a um setor
+      description: Rota intermediaria entre setor e funcionario, recebe o id do setor e do funcionario
       requestBody:
-        description: Dados para guardar id
+        description: Dados para guardar os ids do setor e do funcionario
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Setor_funcionario"
-      required: true
+              $ref: "#/components/schemas/SetorFuncionario"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Setor Funcionario
+      summary: Lista todos os vinculos entre setor e funcionario
+      description: Listagem de todos os vinculos entre setor e funcionario cadastrados no sistema
       responses:
         "200":
-          description: Operação bem-sucedida
-        "400":
-          description: ID inválido fornecido
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SetorFuncionario"
         "404":
-          description: Não encontrado
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/setor-funcionario/{id}:
+    get:
+      tags:
+        - Setor Funcionario
+      summary: Busca um vinculo setor/funcionario pelo ID
+      description: Retorna um vinculo entre setor e funcionario utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do vinculo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetorFuncionario"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Setor Funcionario
+      summary: Atualiza um vinculo setor/funcionario
+      description: Buscar e atualizar um vinculo entre setor e funcionario utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um vinculo setor/funcionario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetorFuncionario"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
         "415":
-          description: Tipo de conteúdo inválido
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Setor Funcionario
+      summary: Remove um vinculo setor/funcionario
+      description: Endpoint para deletar um vinculo entre setor e funcionario utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
 
-          
+  # STATUS DO FUNCIONARIO
+  /v1/oroscorp/status-funcionario:
+    post:
+      tags:
+        - status do funcionario
+      summary: Adiciona um novo status de funcionario
+      description: Endpoint para enviar os dados do novo status de funcionario a ser inserido no sistema
+      requestBody:
+        description: JSON contendo os dados do novo Status de Funcionario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusFuncionario"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - status do funcionario
+      summary: Lista todos os status de funcionario
+      description: Listagem de todos os status de funcionario cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StatusFuncionario"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/status-funcionario/{id}:
+    get:
+      tags:
+        - status do funcionario
+      summary: Busca um status de funcionario pelo ID
+      description: Retorna um status de funcionario utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Status de Funcionario
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusFuncionario"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - status do funcionario
+      summary: Atualizando um Status de Funcionario existente
+      description: Buscar e atualizar um status de funcionario utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de funcionario a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Status de Funcionario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusFuncionario"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - status do funcionario
+      summary: Delete Status de Funcionario
+      description: Endpoint para deletar um Status de Funcionario existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de funcionario a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
 
+  # STATUS DO SETOR
+  /v1/oroscorp/status-setor:
+    post:
+      tags:
+        - status do setor
+      summary: Adiciona um novo status de setor
+      description: Endpoint para enviar os dados do novo status de setor a ser inserido no sistema
+      requestBody:
+        description: JSON contendo os dados do novo Status de Setor
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusSetor"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - status do setor
+      summary: Lista todos os status de setor
+      description: Listagem de todos os status de setor cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StatusSetor"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/status-setor/{id}:
+    get:
+      tags:
+        - status do setor
+      summary: Busca um status de setor pelo ID
+      description: Retorna um status de setor utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Status de Setor
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusSetor"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - status do setor
+      summary: Atualizando um Status de Setor existente
+      description: Buscar e atualizar um status de setor utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de setor a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Status de Setor
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusSetor"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - status do setor
+      summary: Delete Status de Setor
+      description: Endpoint para deletar um Status de Setor existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de setor a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # STATUS DA OCORRENCIA
+  /v1/oroscorp/status-ocorrencia:
+    post:
+      tags:
+        - status da ocorrencia
+      summary: Adiciona um novo status de ocorrencia
+      description: Endpoint para enviar os dados do novo status de ocorrencia a ser inserido no sistema
+      requestBody:
+        description: JSON contendo os dados do novo Status de Ocorrencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusOcorrencia"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - status da ocorrencia
+      summary: Lista todos os status de ocorrencia
+      description: Listagem de todos os status de ocorrencia cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StatusOcorrencia"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/status-ocorrencia/{id}:
+    get:
+      tags:
+        - status da ocorrencia
+      summary: Busca um status de ocorrencia pelo ID
+      description: Retorna um status de ocorrencia utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Status de Ocorrencia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusOcorrencia"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - status da ocorrencia
+      summary: Atualizando um Status de Ocorrencia existente
+      description: Buscar e atualizar um status de ocorrencia utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de ocorrencia a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Status de Ocorrencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusOcorrencia"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - status da ocorrencia
+      summary: Delete Status de Ocorrencia
+      description: Endpoint para deletar um Status de Ocorrencia existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de ocorrencia a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # MOTIVO DA OCORRENCIA
+  /v1/oroscorp/motivo-ocorrencia:
+    post:
+      tags:
+        - motivo da ocorrencia
+      summary: Adiciona um novo motivo de ocorrencia
+      description: Endpoint para enviar os dados do novo motivo de ocorrencia a ser inserido no sistema
+      requestBody:
+        description: JSON contendo os dados do novo Motivo de Ocorrencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MotivoOcorrencia"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - motivo da ocorrencia
+      summary: Lista todos os motivos de ocorrencia
+      description: Listagem de todos os motivos de ocorrencia cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MotivoOcorrencia"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/motivo-ocorrencia/{id}:
+    get:
+      tags:
+        - motivo da ocorrencia
+      summary: Busca um motivo de ocorrencia pelo ID
+      description: Retorna um motivo de ocorrencia utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Motivo de Ocorrencia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MotivoOcorrencia"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - motivo da ocorrencia
+      summary: Atualizando um Motivo de Ocorrencia existente
+      description: Buscar e atualizar um motivo de ocorrencia utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do motivo de ocorrencia a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Motivo de Ocorrencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MotivoOcorrencia"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - motivo da ocorrencia
+      summary: Delete Motivo de Ocorrencia
+      description: Endpoint para deletar um Motivo de Ocorrencia existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do motivo de ocorrencia a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # STATUS DA CAMERA
+  /v1/oroscorp/status-camera:
+    post:
+      tags:
+        - status da camera
+      summary: Adiciona um novo status de camera
+      description: Endpoint para enviar os dados do novo status de camera a ser inserido no sistema
+      requestBody:
+        description: JSON contendo os dados do novo Status de Camera
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusCamera"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - status da camera
+      summary: Lista todos os status de camera
+      description: Listagem de todos os status de camera cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StatusCamera"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/status-camera/{id}:
+    get:
+      tags:
+        - status da camera
+      summary: Busca um status de camera pelo ID
+      description: Retorna um status de camera utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Status de Camera
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusCamera"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - status da camera
+      summary: Atualizando um Status de Camera existente
+      description: Buscar e atualizar um status de camera utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de camera a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Status de Camera
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StatusCamera"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - status da camera
+      summary: Delete Status de Camera
+      description: Endpoint para deletar um Status de Camera existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do status de camera a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # SETOR
+  /v1/oroscorp/setor:
+    post:
+      tags:
+        - Setor
+      summary: Adiciona um novo setor
+      description: Endpoint para enviar os dados do setor a serem cadastrados
+      requestBody:
+        description: JSON contendo os dados do novo Setor a ser inserido no sistema
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Setor"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Setor
+      summary: Lista todos os Setores
+      description: Listagem de todos os setores que foram cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Setor"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/setor/{id}:
+    get:
+      tags:
+        - Setor
+      summary: Busca um Setor pelo ID
+      description: Retorna um Setor utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do Setor
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Setor"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Setor
+      summary: Atualizando um Setor existente
+      description: Buscar e atualizar um setor utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do setor a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um Setor
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Setor"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Setor
+      summary: Delete Setor
+      description: Endpoint para deletar um Setor existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do setor a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # SETOR_RESPONSAVEL
+  /v1/oroscorp/setor-responsavel:
+    post:
+      tags:
+        - Setor Responsavel
+      summary: Vincula um responsavel a um setor
+      description: Rota intermediaria entre setor e responsavel, recebe o id do setor e do responsavel
+      requestBody:
+        description: Dados para guardar os ids do setor e do responsavel
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetorResponsavel"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Setor Responsavel
+      summary: Lista todos os vinculos entre setor e responsavel
+      description: Listagem de todos os vinculos entre setor e responsavel cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SetorResponsavel"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/setor-responsavel/{id}:
+    get:
+      tags:
+        - Setor Responsavel
+      summary: Busca um vinculo setor/responsavel pelo ID
+      description: Retorna um vinculo entre setor e responsavel utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do vinculo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetorResponsavel"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Setor Responsavel
+      summary: Atualiza um vinculo setor/responsavel
+      description: Buscar e atualizar um vinculo entre setor e responsavel utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um vinculo setor/responsavel
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetorResponsavel"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Setor Responsavel
+      summary: Remove um vinculo setor/responsavel
+      description: Endpoint para deletar um vinculo entre setor e responsavel utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # CAMERA
+  /v1/oroscorp/camera:
+    post:
+      tags:
+        - Camera
+      summary: Adiciona uma nova camera
+      description: Endpoint para enviar os dados da camera a serem cadastrados
+      requestBody:
+        description: JSON contendo os dados da nova Camera a ser inserida no sistema
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Camera"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Camera
+      summary: Lista todas as Cameras
+      description: Listagem de todas as cameras que foram cadastradas no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Camera"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/camera/{id}:
+    get:
+      tags:
+        - Camera
+      summary: Busca uma Camera pelo ID
+      description: Retorna uma Camera utilizando o ID da mesma
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca da Camera
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Camera"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Camera
+      summary: Atualizando uma Camera existente
+      description: Buscar e atualizar uma camera utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da camera a ser atualizada
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar uma Camera
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Camera"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Camera
+      summary: Delete Camera
+      description: Endpoint para deletar uma Camera existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da camera a ser deletada
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # EPI
+  /v1/oroscorp/epi:
+    post:
+      tags:
+        - EPI
+      summary: Adiciona um novo EPI
+      description: Endpoint para enviar os dados do EPI a serem cadastrados
+      requestBody:
+        description: JSON contendo os dados do novo EPI a ser inserido no sistema
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Epi"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - EPI
+      summary: Lista todos os EPIs
+      description: Listagem de todos os EPIs que foram cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Epi"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/epi/{id}:
+    get:
+      tags:
+        - EPI
+      summary: Busca um EPI pelo ID
+      description: Retorna um EPI utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do EPI
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Epi"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - EPI
+      summary: Atualizando um EPI existente
+      description: Buscar e atualizar um EPI utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do EPI a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um EPI
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Epi"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - EPI
+      summary: Delete EPI
+      description: Endpoint para deletar um EPI existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do EPI a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # SETOR_EPI
+  /v1/oroscorp/setor-epi:
+    post:
+      tags:
+        - Setor EPI
+      summary: Vincula um EPI exigido a um setor
+      description: Rota intermediaria entre setor e EPI, recebe o id do setor e do EPI
+      requestBody:
+        description: Dados para guardar os ids do setor e do EPI
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetorEpi"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Setor EPI
+      summary: Lista todos os vinculos entre setor e EPI
+      description: Listagem de todos os vinculos entre setor e EPI cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SetorEpi"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/setor-epi/{id}:
+    get:
+      tags:
+        - Setor EPI
+      summary: Busca um vinculo setor/EPI pelo ID
+      description: Retorna um vinculo entre setor e EPI utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do vinculo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SetorEpi"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Setor EPI
+      summary: Atualiza um vinculo setor/EPI
+      description: Buscar e atualizar um vinculo entre setor e EPI utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um vinculo setor/EPI
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SetorEpi"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Setor EPI
+      summary: Remove um vinculo setor/EPI
+      description: Endpoint para deletar um vinculo entre setor e EPI utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # OCORRENCIA
+  /v1/oroscorp/ocorrencia:
+    post:
+      tags:
+        - Ocorrencia
+      summary: Adiciona uma nova ocorrencia
+      description: Gerada pela IA (funcionario e usuarios nulos) ou registrada manualmente por ADM ou responsavel
+      requestBody:
+        description: JSON contendo os dados da nova Ocorrencia a ser inserida no sistema
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ocorrencia"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Ocorrencia
+      summary: Lista todas as Ocorrencias
+      description: Listagem de todas as ocorrencias que foram cadastradas no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Ocorrencia"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/ocorrencia/{id}:
+    get:
+      tags:
+        - Ocorrencia
+      summary: Busca uma Ocorrencia pelo ID
+      description: Retorna uma Ocorrencia utilizando o ID da mesma
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca da Ocorrencia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Ocorrencia"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Ocorrencia
+      summary: Atualizando uma Ocorrencia existente
+      description: Buscar e atualizar uma ocorrencia utilizando o ID. Tambem usado para identificar manualmente o funcionario (id_funcionario e id_usuario_identificacao)
+      parameters:
+        - name: id
+          in: path
+          description: ID da ocorrencia a ser atualizada
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar uma Ocorrencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Ocorrencia"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Ocorrencia
+      summary: Delete Ocorrencia
+      description: Endpoint para deletar uma Ocorrencia existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da ocorrencia a ser deletada
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # OCORRENCIA_EPI
+  /v1/oroscorp/ocorrencia-epi:
+    post:
+      tags:
+        - Ocorrencia EPI
+      summary: Vincula um EPI faltante a uma ocorrencia
+      description: Rota intermediaria entre ocorrencia e EPI, recebe o id da ocorrencia e do EPI
+      requestBody:
+        description: Dados para guardar os ids da ocorrencia e do EPI
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OcorrenciaEpi"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Ocorrencia EPI
+      summary: Lista todos os vinculos entre ocorrencia e EPI
+      description: Listagem de todos os vinculos entre ocorrencia e EPI cadastrados no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OcorrenciaEpi"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/ocorrencia-epi/{id}:
+    get:
+      tags:
+        - Ocorrencia EPI
+      summary: Busca um vinculo ocorrencia/EPI pelo ID
+      description: Retorna um vinculo entre ocorrencia e EPI utilizando o ID do mesmo
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca do vinculo
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OcorrenciaEpi"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Ocorrencia EPI
+      summary: Atualiza um vinculo ocorrencia/EPI
+      description: Buscar e atualizar um vinculo entre ocorrencia e EPI utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser atualizado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar um vinculo ocorrencia/EPI
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OcorrenciaEpi"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Ocorrencia EPI
+      summary: Remove um vinculo ocorrencia/EPI
+      description: Endpoint para deletar um vinculo entre ocorrencia e EPI utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do vinculo a ser deletado
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+
+  # OCORRENCIA_CAMERA (EVIDENCIAS)
+  /v1/oroscorp/ocorrencia-camera:
+    post:
+      tags:
+        - Ocorrencia Camera
+      summary: Adiciona uma evidencia (foto) a uma ocorrencia
+      description: id_camera e confianca_ia ficam nulos quando a foto e anexada manualmente
+      requestBody:
+        description: Dados da evidencia a ser vinculada a ocorrencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OcorrenciaCamera"
+        required: true
+      responses:
+        "201":
+          description: Successful operation
+        "400":
+          description: Invalid input
+        "415":
+          description: Invalid Content-Type
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+    get:
+      tags:
+        - Ocorrencia Camera
+      summary: Lista todas as evidencias
+      description: Listagem de todas as evidencias cadastradas no sistema
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/OcorrenciaCamera"
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal server (CONTROLLER/MODEL)
+  /v1/oroscorp/ocorrencia-camera/{id}:
+    get:
+      tags:
+        - Ocorrencia Camera
+      summary: Busca uma evidencia pelo ID
+      description: Retorna uma evidencia utilizando o ID da mesma
+      parameters:
+        - name: id
+          in: path
+          description: ID para realizar a busca da evidencia
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OcorrenciaCamera"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
+    put:
+      tags:
+        - Ocorrencia Camera
+      summary: Atualiza uma evidencia existente
+      description: Buscar e atualizar uma evidencia utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da evidencia a ser atualizada
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Dados para atualizar uma evidencia
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OcorrenciaCamera"
+        required: true
+      responses:
+        "200":
+          description: Successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "415":
+          description: Invalid content-Type
+        "500":
+          description: Error Internal Server(CONTROLLER/MODEL)
+    delete:
+      tags:
+        - Ocorrencia Camera
+      summary: Delete evidencia
+      description: Endpoint para deletar uma evidencia existente utilizando o ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da evidencia a ser deletada
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Not Found
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
 
 components:
   schemas:
-  # Usuario
+
+    # Nivel de acesso
+    NivelAcesso:
+      required:
+        - nome
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 20
+          example: "ADM"
+
+    # Status de Conta
+    StatusConta:
+      required:
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          maxLength: 20
+          example: "Ativo"
+
+    # Status de Funcionario
+    StatusFuncionario:
+      required:
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          maxLength: 20
+          example: "Ferias"
+
+    # Status de Setor
+    StatusSetor:
+      required:
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          maxLength: 25
+          example: "Em manutencao"
+
+    # Status de Ocorrencia
+    StatusOcorrencia:
+      required:
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          maxLength: 25
+          example: "Em analise"
+
+    # Motivo de Ocorrencia
+    MotivoOcorrencia:
+      required:
+        - nome
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 30
+          example: "Ausencia de EPI"
+
+    # Status de Camera
+    StatusCamera:
+      required:
+        - status
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        status:
+          type: string
+          maxLength: 20
+          example: "Ativa"
+
+    # Cargo
+    Cargo:
+      required:
+        - cargo
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        cargo:
+          type: string
+          maxLength: 30
+          example: "Soldador"
+
+    # Usuario
     Usuario:
       required:
         - nome
@@ -949,62 +2707,53 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
         nome:
           type: string
-          example: "Matheus"
+          maxLength: 100
+          example: "Carlos Silva"
         foto:
           type: string
-          example: "URL da imagem do setor"
+          maxLength: 256
+          example: "URL da foto do usuario"
         email:
           type: string
-          example: "matheus@example.com"
+          format: email
+          maxLength: 256
+          example: "carlos@oroscorp.com"
         senha:
           type: string
+          format: password
+          writeOnly: true
           example: "senha123"
         data_nascimento:
           type: string
           format: date
+          example: "1980-05-16"
         id_nivel_acesso:
           type: integer
+          example: 1
         id_status_conta:
           type: integer
-
-
-  # Nivel de acesso
-    NivelAcesso:
-      required:
-        - nome
-      type: object
-      properties:
-        id:
-          type: integer
-        nome:
-          type: string
-          example: "Administrador"
-
-    # Status de Conta
-    StatusConta:
-      required:
-        - nome
-      type: object
-      properties:
-        id:
-          type: integer
-        nome:
-          type: string
-          example: "Ativo"
+          example: 1
 
     # Responsavel
     Responsavel:
-      required:      
+      required:
         - cpf
+        - id_usuario
       type: object
       properties:
         id:
           type: integer
-        cpf: 
+          readOnly: true
+        cpf:
           type: string
-          example: 12345678900
+          maxLength: 15
+          example: "123.456.789-00"
+        id_usuario:
+          type: integer
+          example: 2
 
     # Administrador
     Administrador:
@@ -1016,102 +2765,304 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
         cnpj:
           type: string
-          example: 12345678900000
+          maxLength: 20
+          example: "12.345.678/0001-90"
         razao_social:
           type: string
-          example: "Oroscorp"
+          maxLength: 80
+          example: "Oroscorp Industria LTDA"
         id_usuario:
           type: integer
           example: 1
 
-    # Cargo
-    Cargo:
-      required:
-        - nome
-      type: object
-      properties:
-        id:
-          type: integer
-        nome:
-          type: string
-          example: "Soldador"
-    
     # Funcionario
     Funcionario:
       required:
         - nome
+        - data_nascimento
         - cpf
-        - idade
         - email
         - foto
         - id_cargo
+        - id_setor
+        - id_status_funcionario
       type: object
       properties:
         id:
           type: integer
+          readOnly: true
         nome:
           type: string
-          example: "João da Silva"
+          maxLength: 80
+          example: "Joao Souza"
+        data_nascimento:
+          type: string
+          format: date
+          example: "1995-07-10"
         cpf:
           type: string
-          example: 12345678900
+          maxLength: 15
+          example: "987.654.321-00"
+        email:
+          type: string
+          format: email
+          maxLength: 256
+          example: "joao.souza@oroscorp.com"
+        foto:
+          type: string
+          maxLength: 256
+          example: "URL da foto do funcionario"
         id_cargo:
           type: integer
           example: 1
-        idade:
+        id_setor:
           type: integer
-          example: 30
-        email:
+          example: 1
+        id_status_funcionario:
+          type: integer
+          example: 1
+
+    # Setor
+    Setor:
+      required:
+        - nome
+        - descricao
+        - foto
+        - local
+        - id_status_setor
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
           type: string
-          example: "joao.silva@example.com"
+          maxLength: 80
+          example: "Soldagem"
+        descricao:
+          type: string
+          maxLength: 500
+          example: "Setor responsavel pela soldagem de estruturas metalicas"
         foto:
           type: string
-          example: "URL da imagem do funcionário"
+          maxLength: 256
+          example: "URL da foto do setor"
+        local:
+          type: string
+          maxLength: 80
+          example: "Galpao A, piso 1"
+        id_status_setor:
+          type: integer
+          example: 1
 
+    # Setor x Funcionario
+    SetorFuncionario:
+      required:
+        - id_setor
+        - id_funcionario
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        id_setor:
+          type: integer
+          example: 1
+        id_funcionario:
+          type: integer
+          example: 1
 
+    # Setor x Responsavel
+    SetorResponsavel:
+      required:
+        - id_setor
+        - id_responsavel
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        id_setor:
+          type: integer
+          example: 1
+        id_responsavel:
+          type: integer
+          example: 1
 
-  requestBodies:
-  
-    NivelAcesso:
-      description: Objeto que deve ser enviado no Body das requisicoes
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/NivelAcesso"
+    # Camera
+    Camera:
+      required:
+        - nome
+        - descricao
+        - endereco_stream
+        - id_setor
+        - id_status_camera
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 30
+          example: "Camera 03"
+        descricao:
+          type: string
+          maxLength: 500
+          example: "Camera fixa voltada para a bancada de solda"
+        endereco_stream:
+          type: string
+          maxLength: 255
+          example: "rtsp://192.168.0.13:554/stream"
+        id_setor:
+          type: integer
+          example: 1
+        id_status_camera:
+          type: integer
+          example: 1
 
-    Usuario:
-      description: Objeto que deve ser enviado no Body das requisicoes
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Usuario"
+    # EPI
+    Epi:
+      required:
+        - nome
+        - descricao
+        - qtde
+        - foto
+        - cor
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        nome:
+          type: string
+          maxLength: 50
+          example: "Capacete"
+        descricao:
+          type: string
+          maxLength: 500
+          example: "Capacete de seguranca com viseira"
+        qtde:
+          type: integer
+          default: 0
+          example: 50
+        foto:
+          type: string
+          maxLength: 256
+          example: "URL da foto do EPI"
+        cor:
+          type: string
+          maxLength: 30
+          example: "Amarelo"
 
-    StatusConta:
-      description: Objeto que deve ser enviado no Body das requisicoes
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/StatusConta"
-    
-    Responsavel:
-      description: Objeto que deve ser enviado no Body das requisicoes
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Responsavel"
+    # Setor x EPI
+    SetorEpi:
+      required:
+        - id_setor
+        - id_epi
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        id_setor:
+          type: integer
+          example: 1
+        id_epi:
+          type: integer
+          example: 1
 
-    Administrador:
-      description: Objeto que deve ser enviado no Body das requisicoes
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Administrador"
+    # Ocorrencia
+    Ocorrencia:
+      required:
+        - descricao
+        - id_setor
+        - id_motivo_ocorrencia
+        - id_status_ocorrencia
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        descricao:
+          type: string
+          maxLength: 500
+          example: "A inteligencia artificial detectou um colaborador sem capacete de seguranca."
+        id_setor:
+          type: integer
+          example: 1
+        id_funcionario:
+          type: integer
+          nullable: true
+          description: Nulo quando a IA nao reconheceu o rosto
+          example: null
+        id_motivo_ocorrencia:
+          type: integer
+          example: 1
+        id_status_ocorrencia:
+          type: integer
+          example: 1
+        id_usuario_registro:
+          type: integer
+          nullable: true
+          description: Nulo quando a ocorrencia foi gerada pela IA
+          example: null
+        id_usuario_identificacao:
+          type: integer
+          nullable: true
+          description: Quem identificou manualmente o funcionario
+          example: null
 
-    Cargo:
-      description: Objeto que deve ser enviado no Body das requisicoes
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Cargo"
+    # Ocorrencia x EPI
+    OcorrenciaEpi:
+      required:
+        - id_ocorrencia
+        - id_epi
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        id_ocorrencia:
+          type: integer
+          example: 1
+        id_epi:
+          type: integer
+          example: 1
+
+    # Ocorrencia x Camera (evidencias)
+    OcorrenciaCamera:
+      required:
+        - id_ocorrencia
+        - foto
+        - data_hora
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        id_ocorrencia:
+          type: integer
+          example: 1
+        id_camera:
+          type: integer
+          nullable: true
+          description: Nulo quando a foto foi anexada manualmente
+          example: 1
+        foto:
+          type: string
+          maxLength: 256
+          example: "ocorrencia125_cam03.jpg"
+        data_hora:
+          type: string
+          format: date-time
+          example: "2026-08-28T14:32:18"
+        confianca_ia:
+          type: number
+          format: float
+          nullable: true
+          description: Nulo quando nao houve deteccao automatica
+          example: 94.00
