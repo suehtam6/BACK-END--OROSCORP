@@ -902,6 +902,33 @@ paths:
         "500":
           description: Error Internal Server (CONTROLLER/MODEL)
 
+   # Setor_funcionario
+  /v1/oroscorp/setor_funcionario:
+    post:
+      tag:
+       - Setor_funcionario
+      summary:
+        recebe o id de setor e funcionarios 
+      descripition:
+        rota intermediaria de setor e funcionario 
+      requestBody:
+        description: Dados para guardar id
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Setor_funcionario"
+      required: true
+      responses:
+        "200":
+          description: Operação bem-sucedida
+        "400":
+          description: ID inválido fornecido
+        "404":
+          description: Não encontrado
+        "415":
+          description: Tipo de conteúdo inválido
+        "500":
+          description: Error Internal Server (CONTROLLER/MODEL)
 
           
 
@@ -1042,6 +1069,8 @@ components:
         foto:
           type: string
           example: "URL da imagem do funcionário"
+
+
 
   requestBodies:
   
