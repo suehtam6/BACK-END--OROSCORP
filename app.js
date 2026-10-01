@@ -30,9 +30,15 @@ app.use(cors(corsOptions))
 
 // AQUI VAI FICAR AS ROUTES DO PROJETO!!
 
-// IMPORT DO ARQUIVO DE ROTAS SOBRE O FILME
-const nivelAcessoRouter = require('./routes/nivel_acesso.router')
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O NIVEL DE ACESSO
+const nivelAcessoRouter = require('./routes/nivel_acesso.router.js')
 app.use('/v1/oroscorp/nivel-acesso', cors(), nivelAcessoRouter)
+
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA CONTA
+const statusContaRouter = require('./routes/status_conta.router.js')
+app.use('/v1/oroscorp/status-conta', cors(), statusContaRouter)
+
+
 
 
 

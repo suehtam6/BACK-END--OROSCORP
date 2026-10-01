@@ -17,7 +17,7 @@ const router = express.Router()
 //Import da controller
 const controllerNivelAcesso = require('../controller/controller_nivel_acesso/controller_nivel_acesso')
 
-// endpoint para o CRUD do filme
+// endpoint para o CRUD do nivel de acesso
 router.post('/',bodyParserJSON, async function(request, response){
     // Recebendo o body da requisição
      let  dados = request.body
@@ -31,7 +31,7 @@ router.post('/',bodyParserJSON, async function(request, response){
      response.json(result)
  })
  
- // endpoint para pegar todos os filmes
+ // endpoint para pegar todos os nivel de acesso
 router.get('/', async function(request, response){
      let result = await controllerNivelAcesso.listarNivelAcesso()
  
@@ -39,7 +39,7 @@ router.get('/', async function(request, response){
      response.json(result)
  })
  
- // endpoint para pegar um filme pelo id
+ // endpoint para pegar um nivel de acesso pelo id
 router.get('/:id', async function(request, response) {
      let id = request.params.id
  
@@ -49,7 +49,7 @@ router.get('/:id', async function(request, response) {
      response.json(result)
  })
  
- // endpoint para atualizar um filme
+ // endpoint para atualizar um nivel de acesso
 router.put('/:id', bodyParserJSON, async function(request, response) {
  
      // Recebe o id do registro a ser atualizado.
@@ -61,7 +61,7 @@ router.put('/:id', bodyParserJSON, async function(request, response) {
      // Recebe o content-type da requisição para validar se é JSON.
      let contentType = request.headers['content-type']
      
-     // Chama a função para atualizar o filme.
+     // Chama a função para atualizar o nivel de acesso.
      let result = await controllerNivelAcesso.atualizarNivelAcesso(dados, id, contentType)
  
      response.status(result.status_code)
