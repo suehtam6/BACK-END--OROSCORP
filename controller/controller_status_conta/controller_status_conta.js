@@ -170,7 +170,7 @@ const buscarStatusConta = async function (id) {
 
                     customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_RESPONSE.status
                     customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_RESPONSE.status_code
-                    customMessage.DEFAULT_MESSAGE.response.cargo = result
+                    customMessage.DEFAULT_MESSAGE.response.dados = result
 
                     return customMessage.DEFAULT_MESSAGE // RETORNA UM 200
 

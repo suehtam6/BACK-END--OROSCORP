@@ -38,6 +38,10 @@ app.use('/v1/oroscorp/nivel-acesso', cors(), nivelAcessoRouter)
 const statusContaRouter = require('./routes/status_conta.router.js')
 app.use('/v1/oroscorp/status-conta', cors(), statusContaRouter)
 
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA CONTA
+const usuarioRouter = require('./routes/usuario.router.js')
+app.use('/v1/oroscorp/usuario', cors(), usuarioRouter)
+
 
 
 
