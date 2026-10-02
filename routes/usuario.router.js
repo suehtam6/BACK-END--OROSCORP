@@ -16,9 +16,17 @@ const router = express.Router()
 
 //Import da controller
 const controllerUsuario = require('../controller/controller_usuario/controller_usuario.js')
+const controllerLogin = require('../controller/controller_login/controller_login.js')
 
-// endpoint para o CRUD do status
-router.post('/',bodyParserJSON, async function(request, response){
+// Import do modulo de token e do middleware de cadastro inicial
+const tokenModulo = require('../controller/modulo/token.js')
+const autorizacaoCadastroInicial = require('../controller/modulo/autorizacaoCadastroInicial.js')
+
+
+// endpoint para cadastrar usuario.
+// Liberado sem token APENAS enquanto nao existir nenhum usuario no banco.
+// Depois do primeiro cadastro, passa a exigir token + nivel ADM automaticamente.
+router.post('/', bodyParserJSON, autorizacaoCadastroInicial.permitirCadastroInicialOuExigirAdm, async function(request, response){
     // Recebendo o body da requisição
      let  dados = request.body
  
@@ -31,16 +39,16 @@ router.post('/',bodyParserJSON, async function(request, response){
      response.json(result)
  })
  
- // endpoint para pegar todos os status
-router.get('/', async function(request, response){
+ // endpoint para pegar todos os usuarios - exige estar logado
+router.get('/', tokenModulo.verificarToken, async function(request, response){
      let result = await controllerUsuario.listarUsuario()
  
      response.status(result.status_code)
      response.json(result)
  })
  
- // endpoint para pegar um status pelo id
-router.get('/:id', async function(request, response) {
+ // endpoint para pegar um usuario pelo id - exige estar logado
+router.get('/:id', tokenModulo.verificarToken, async function(request, response) {
      let id = request.params.id
  
      let result = await controllerUsuario.buscarUsuario(id)
@@ -49,8 +57,8 @@ router.get('/:id', async function(request, response) {
      response.json(result)
  })
  
- // endpoint para atualizar um status
-router.put('/:id', bodyParserJSON, async function(request, response) {
+ // endpoint para atualizar um usuario - exige estar logado
+router.put('/:id', bodyParserJSON, tokenModulo.verificarToken, async function(request, response) {
  
      // Recebe o id do registro a ser atualizado.
      let id = request.params.id
@@ -68,7 +76,8 @@ router.put('/:id', bodyParserJSON, async function(request, response) {
      response.json(result)
  })
  
-router.delete('/:id', async function (request, response){
+// endpoint para excluir um usuario - exige estar logado
+router.delete('/:id', tokenModulo.verificarToken, async function (request, response){
      let id = request.params.id
  
      let result = await controllerUsuario.excluirUsuario(id)

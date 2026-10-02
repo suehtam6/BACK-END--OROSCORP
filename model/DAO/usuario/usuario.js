@@ -3,6 +3,8 @@
  * Data: 2026/10/01
  * Autor: Matheus Lucas
  * Versão: 1.0
+ *
+ * Caminho sugerido: model/DAO/usuario/usuario.js
  *************************************************************************************/
 
 // Import da biblioteca Knex para manipular dados no Banco de dados MySQL.
@@ -127,10 +129,30 @@ const deleteUsuario = async function(id) {
     }
 }
 
+// Verifica se ja existe pelo menos um usuario cadastrado no sistema.
+// Usada pelo middleware que libera o cadastro do primeiro ADM sem token
+// (autorizacaoCadastroInicial.js).
+const existeUsuario = async function () {
+    try {
+        let sql = `select count(*) as total from tbl_usuario;`
+        let result = await knexConection.raw(sql)
+
+        if (Array.isArray(result[0]) && result[0].length > 0) {
+            return result[0][0].total > 0
+        } else {
+            return false
+        }
+
+    } catch (error) {
+        return false
+    }
+}
+
 module.exports = {
     insertUsuario,
     updateUsuario,
     selectAllUsuario,
     selectByIdUsuario,
-    deleteUsuario
+    deleteUsuario,
+    existeUsuario
 }

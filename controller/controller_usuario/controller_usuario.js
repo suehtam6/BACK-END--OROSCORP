@@ -15,6 +15,9 @@ const usuarioDAO = require('../../model/DAO/usuario/usuario.js')
 const controllerNivelAcesso = require("../controller_nivel_acesso/controller_nivel_acesso.js")
 const controllerStatusConta = require("../controller_status_conta/controller_status_conta.js")
 
+// Import da biblioteca para gerar o hash da senha antes de salvar no banco
+const bcrypt = require('bcryptjs')
+
 
 
 const inserirUsuario = async function (dados, contentType) {
@@ -136,7 +139,7 @@ const listarUsuario = async function () {
 
             if (result.length > 0) {
 
-for (dados of result) {
+                for (dados of result) {
                    
                     let resultUsuarioNivelAcesso = await controllerNivelAcesso.buscarNivelAcesso(dados.id_nivel_acesso)
 
@@ -154,7 +157,7 @@ for (dados of result) {
                     if (resultUsuarioStatusConta.status) {
                         dados.status_conta = resultUsuarioStatusConta.response.dados
 
-                    delete dados.id_status_conta
+                        delete dados.id_status_conta
                     } else {
                         return resultUsuarioNivelAcesso
                     }
@@ -221,18 +224,13 @@ const buscarUsuario = async function (id) {
                     if (resultUsuarioStatusConta.status) {
                         dados.status_conta = resultUsuarioStatusConta.response.dados
 
-                    delete dados.id_status_conta
+                        delete dados.id_status_conta
                     } else {
                         return resultUsuarioNivelAcesso
                     }
 
 
                 }
-
-
-
-
-
 
 
                     customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_RESPONSE.status
@@ -286,37 +284,42 @@ const excluirUsuario = async function (id) {
 }
 
 const validarDados = async function (dados) {
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
+
     if (dados.nome == undefined || dados.nome == '' || dados.nome == null || dados.nome.length > 100) {
         customMessage.ERROR_BAD_REQUEST.field = '[NOME] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
-    } else if((dados.foto == undefined || dados.foto == '' || dados.foto == null || dados.foto.length > 256)){
-        ustomMessage.ERROR_BAD_REQUEST.field = '[FOTO] INVÁLIDO'
+    } else if ((dados.foto == undefined || dados.foto == '' || dados.foto == null || dados.foto.length > 256)) {
+        customMessage.ERROR_BAD_REQUEST.field = '[FOTO] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
-    }else if((dados.email == undefined || dados.email == '' || dados.email == null || dados.email.length > 256)){
+    } else if ((dados.email == undefined || dados.email == '' || dados.email == null || dados.email.length > 256)) {
         customMessage.ERROR_BAD_REQUEST.field = '[E-MAIL] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
-    }else if((dados.senha == undefined || dados.senha == '' || dados.senha == null || dados.senha.length > 516)){
+    } else if ((dados.senha == undefined || dados.senha == '' || dados.senha == null || dados.senha.length > 516)) {
         customMessage.ERROR_BAD_REQUEST.field = '[SENHA] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
-    }else if (dados.data_nascimento == undefined || dados.data_nascimento == '' || dados.data_nascimento == null || dados.data_nascimento.length != 10) {
+    } else if (dados.data_nascimento == undefined || dados.data_nascimento == '' || dados.data_nascimento == null || dados.data_nascimento.length != 10) {
         customMessage.ERROR_BAD_REQUEST.field = '[DATA NASCIMENTO] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_nivel_acesso == undefined || String(dados.id_nivel_acesso).replaceAll(' ', '') == '' || dados.id_nivel_acesso == null || isNaN(dados.id_nivel_acesso) || dados.id_nivel_acesso <= 0){
+    } else if (dados.id_nivel_acesso == undefined || String(dados.id_nivel_acesso).replaceAll(' ', '') == '' || dados.id_nivel_acesso == null || isNaN(dados.id_nivel_acesso) || dados.id_nivel_acesso <= 0) {
         customMessage.ERROR_BAD_REQUEST.field = '[ID DE NIVEL DE ACESSO] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_status_conta == undefined || String(dados.id_status_conta).replaceAll(' ', '') == '' || dados.id_status_conta == null || isNaN(dados.id_status_conta) || dados.id_status_conta <= 0){
+    } else if (dados.id_status_conta == undefined || String(dados.id_status_conta).replaceAll(' ', '') == '' || dados.id_status_conta == null || isNaN(dados.id_status_conta) || dados.id_status_conta <= 0) {
         customMessage.ERROR_BAD_REQUEST.field = '[ID DO STATUS DA CONTA] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST
     }
+
+    return false
 }
 
 const tratarDados = async function (dados) {
-    dados.nome == dados.nome.replaceAll("'", ""),
-    dados.foto == dados.foto.replaceAll("'", ""),
-    dados.email == dados.email.replaceAll("'", ""),
-    dados.senha == dados.senha.replaceAll("'", ""),
-    dados.data_nascimento == dados.data_nascimento.replaceAll("'", "")
+    dados.nome = dados.nome.replaceAll("'", "")
+    dados.foto = dados.foto.replaceAll("'", "")
+    dados.email = dados.email.replaceAll("'", "")
+    dados.data_nascimento = dados.data_nascimento.replaceAll("'", "")
 
+    
+    dados.senha = await bcrypt.hash(dados.senha.replaceAll("'", ""), 10)
 
     return dados
 }
