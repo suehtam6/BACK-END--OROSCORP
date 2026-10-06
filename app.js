@@ -47,8 +47,14 @@ app.use('/v1/oroscorp/usuario', cors(), usuarioRouter)
 
 
 // IMPORT DO ARQUIVO DA ROTA SOBRE O LOGIN
-const loginRouter = require('./routes/login.js')
+const loginRouter = require('./routes/login.router.js')
 app.use('/v1/oroscorp/login', cors(), loginRouter)
+
+
+
+// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
+const admRouter = require('./routes/adm.router.js')
+app.use('/v1/oroscorp/administrador', cors(), admRouter)
 
 
 
