@@ -102,3 +102,11 @@ const deleteStatosFuncionario = async function(id){
         return false
     }
 }
+
+module.exports = {
+    insertStatusFuncionario,
+    updateStatusFuncionario,
+    selectAllStatosFuncionario,
+    selectByIdStatosFuncionario,
+    deleteStatosFuncionario
+}
