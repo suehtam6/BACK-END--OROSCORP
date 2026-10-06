@@ -238,7 +238,7 @@ const excluirADM = async function (id) {
     let customMessage = JSON.parse(JSON.stringify(configMessages))
 
     try {
-        let result = await usuarioDAO.deleteADM(id)
+        let result = await admDAO.deleteADM(id)
         if (result) {
 
             customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_DELETED_ITEM.status

@@ -51,10 +51,15 @@ const loginRouter = require('./routes/login.router.js')
 app.use('/v1/oroscorp/login', cors(), loginRouter)
 
 
-
 // IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
 const admRouter = require('./routes/adm.router.js')
 app.use('/v1/oroscorp/administrador', cors(), admRouter)
+
+
+// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
+const responsavelRouter = require('./routes/responsavel.router.js')
+app.use('/v1/oroscorp/responsavel', cors(), responsavelRouter)
+
 
 
 
