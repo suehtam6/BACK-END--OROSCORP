@@ -34,6 +34,7 @@ const insertResponsavel = async function(dados) {
         }
 
     } catch (error) {
+        console.log(error)
         return false
     }
 }

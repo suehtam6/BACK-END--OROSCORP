@@ -61,6 +61,11 @@ const responsavelRouter = require('./routes/responsavel.router.js')
 app.use('/v1/oroscorp/responsavel', cors(), responsavelRouter)
 
 
+// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
+const cargoRouter = require('./routes/cargo.router.js')
+app.use('/v1/oroscorp/cargo', cors(), cargoRouter)
+
+
 
 
 
