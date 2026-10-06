@@ -36,7 +36,7 @@ const inserirStatusFuncionario = async function(dados, contentType){
         
                     if (!validar) {
         
-                        let result = await status_funcionarioDAO.inserirStatusFuncionario(await tratarDados(dados))
+                        let result = await status_funcionarioDAO.insertStatusFuncionario(await tratarDados(dados))
         
                         if (result) {
                             dados.id = result
@@ -61,11 +61,12 @@ const inserirStatusFuncionario = async function(dados, contentType){
                     return customMessage.ERROR_CONTENT_TYPE // RETORNA UM 415
                 }
     } catch (error) {
+        console.log(error)
         return customMessage.ERROR_INTERNAL_SERVER_CONTROLLER // RETORNA UM 500 (Controller)
     }
 }
 
-const BuscarStatusFunfionario = async function (id) {
+const buscarStatusFunfionario = async function (id) {
     let customMessage = JSON.parse(JSON.stringify(configMessages))
 
     try {
@@ -107,7 +108,7 @@ const BuscarStatusFunfionario = async function (id) {
 }
 
 
-const updateStatusFuncionario = async function(dados, id, contentType){
+const atualuzarStatusFuncionario = async function(dados, id, contentType){
     
     let customMessage = JSON.parse(JSON.stringify(configMessages))
     
@@ -116,7 +117,7 @@ const updateStatusFuncionario = async function(dados, id, contentType){
                 // Validando o content type, para saber se é um JSON que está sendo enviado.
                 if (String(contentType).toUpperCase() == 'APPLICATION/JSON') {
         
-                    let resultBuscarStatusFunfionario = await BuscarStatusFunfionario(id)
+                    let resultBuscarStatusFunfionario = await buscarStatusFunfionario(id)
         
                     if(resultBuscarStatusFunfionario.status){
         
@@ -172,7 +173,7 @@ const listarStatusFuncionario = async function () {
 
     try {
 
-        let result = await status_funcionarioDAO.selectAllStatusFuncionarios()
+        let result = await status_funcionarioDAO.selectAllStatusFuncionario()
 
         if (result) {
 
@@ -194,6 +195,8 @@ const listarStatusFuncionario = async function () {
         }
 
     } catch (error) {
+        console.log(error);
+        
         return customMessage.ERROR_INTERNAL_SERVER_CONTROLLER // RETORNA UM 500 (CONTROLLER)
     }
 }
@@ -223,8 +226,8 @@ const excluirStatusFuncionario = async function (id) {
 
 module.exports ={
     inserirStatusFuncionario,
-    BuscarStatusFunfionario,
-    updateStatusFuncionario,
+    buscarStatusFunfionario,
+    atualuzarStatusFuncionario,
     listarStatusFuncionario,
     excluirStatusFuncionario
 }

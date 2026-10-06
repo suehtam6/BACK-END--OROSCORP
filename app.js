@@ -50,8 +50,9 @@ app.use('/v1/oroscorp/usuario', cors(), usuarioRouter)
 const loginRouter = require('./routes/login.js')
 app.use('/v1/oroscorp/login', cors(), loginRouter)
 
-
-
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS_FUNCIONARIO
+const status_funcionario = require('./routes/status_funcionario.js')
+app.use("/v1/oroscorp/statusfuncionario", cors(), status_funcionario)
 
 
 

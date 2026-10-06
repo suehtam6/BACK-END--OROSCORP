@@ -15,8 +15,11 @@ const knexConection = knex(knexDataBaseConfig.development)
 
 const insertStatusFuncionario = async function(dados) {
     try {
-        let sql = `insert into tbl_status_funcionario (${dados}) values
-                    ('${dados.status}'),`
+        let sql = `insert into tbl_status_funcionario 
+                (
+                status
+                ) values
+                    ('${dados.status}')`
 
         
         let result = await knexConection.raw(sql)
@@ -28,6 +31,7 @@ const insertStatusFuncionario = async function(dados) {
         }
 
     } catch (error) {
+    
         return false
     }
 }
@@ -52,7 +56,7 @@ const updateStatusFuncionario = async function(dados){
     }
 }
 
-const selectAllStatosFuncionario = async function(){
+const selectAllStatusFuncionario = async function(){
     try {
         let sql = `select * from tbl_status_funcionario order by id desc`
 
@@ -106,7 +110,7 @@ const deleteStatosFuncionario = async function(id){
 module.exports = {
     insertStatusFuncionario,
     updateStatusFuncionario,
-    selectAllStatosFuncionario,
+    selectAllStatusFuncionario,
     selectByIdStatosFuncionario,
     deleteStatosFuncionario
 }
