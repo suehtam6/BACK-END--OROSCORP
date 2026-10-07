@@ -29,7 +29,7 @@ const DEFAULT_MESSAGE_NATHAN = {
 // Função para padronizar as messagens da API.
 const DEFAULT_MESSAGE_ESTEPHANO = {
     api_description: 'API para controlar projetos do TCC - OROSCORP',
-    development: 'ESTEPHANO',
+    development: 'Estephano Borovicz Bisneto',
     version: '1.0.10.26',
     status: Boolean,
     status_code: Number,
