@@ -40,6 +40,10 @@ const SUCCESS_UPDATED_ITEM          = {status: true, status_code: 200, message: 
 
 const SUCCESS_DELETED_ITEM          = {status: true, status_code: 200, message: 'Item deletado com sucesso!'}
 
+// Funções para verificar o login do usuario
+const ERROR_UNAUTHORIZED =  {status: false, status_code: 401, message: 'Email ou senha invalidos.'}
+
+const ERROR_FORBIDDEN = {status: false, status_code: 403, message: 'Voce nao tem permissao para acessar este recurso.'}
 
 
 module.exports = {
@@ -54,4 +58,6 @@ module.exports = {
     SUCCESS_RESPONSE,
     SUCCESS_UPDATED_ITEM,
     SUCCESS_DELETED_ITEM,
+    ERROR_FORBIDDEN,
+    ERROR_UNAUTHORIZED
 }
