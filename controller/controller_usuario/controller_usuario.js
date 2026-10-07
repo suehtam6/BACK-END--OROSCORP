@@ -38,11 +38,11 @@ const inserirUsuario = async function (dados, contentType) {
                 if (result) {
                     dados.id = result
 
-                    customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_CREATE_ITEM.status
-                    customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_CREATE_ITEM.status_code
-                    customMessage.DEFAULT_MESSAGE.message = customMessage.SUCCESS_CREATE_ITEM.message
-                    customMessage.DEFAULT_MESSAGE.response = dados
-                    return customMessage.DEFAULT_MESSAGE // RETORNA UM 201
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_CREATE_ITEM.status
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_CREATE_ITEM.status_code
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.message = customMessage.SUCCESS_CREATE_ITEM.message
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.response = dados
+                    return customMessage.DEFAULT_MESSAGE_MATHEUS // RETORNA UM 201
 
                 } else {
                     return customMessage.ERROR_INTERNAL_SERVER_MODEL // RETORNA UM 500 (MODEL)
@@ -92,11 +92,11 @@ const atualizarUsuario = async function (dados, id, contentType) {
 
                         if(result){
 
-                            customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_UPDATED_ITEM.status
-                            customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_UPDATED_ITEM.status_code
-                            customMessage.DEFAULT_MESSAGE.message = customMessage.SUCCESS_UPDATED_ITEM.message
-                            customMessage.DEFAULT_MESSAGE.response = dados
-                            return customMessage.DEFAULT_MESSAGE //RETORNA 200
+                            customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_UPDATED_ITEM.status
+                            customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_UPDATED_ITEM.status_code
+                            customMessage.DEFAULT_MESSAGE_MATHEUS.message = customMessage.SUCCESS_UPDATED_ITEM.message
+                            customMessage.DEFAULT_MESSAGE_MATHEUS.response = dados
+                            return customMessage.DEFAULT_MESSAGE_MATHEUS //RETORNA 200
 
 
                         }else{
@@ -166,12 +166,12 @@ const listarUsuario = async function () {
                 }
 
 
-                customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_RESPONSE.status
-                customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_RESPONSE.status_code // RETORNA UM 200
-                customMessage.DEFAULT_MESSAGE.response.count = result.length
-                customMessage.DEFAULT_MESSAGE.response.dados = result
+                customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_RESPONSE.status
+                customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_RESPONSE.status_code // RETORNA UM 200
+                customMessage.DEFAULT_MESSAGE_MATHEUS.response.count = result.length
+                customMessage.DEFAULT_MESSAGE_MATHEUS.response.dados = result
 
-                return customMessage.DEFAULT_MESSAGE // RETORNA UM 200
+                return customMessage.DEFAULT_MESSAGE_MATHEUS // RETORNA UM 200
 
             } else {
                 return customMessage.ERROR_NOT_FOUND  // RETORNA UM 400
@@ -233,11 +233,11 @@ const buscarUsuario = async function (id) {
                 }
 
 
-                    customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_RESPONSE.status
-                    customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_RESPONSE.status_code
-                    customMessage.DEFAULT_MESSAGE.response.dados = result
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_RESPONSE.status
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_RESPONSE.status_code
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.response.dados = result
 
-                    return customMessage.DEFAULT_MESSAGE // RETORNA UM 200
+                    return customMessage.DEFAULT_MESSAGE_MATHEUS // RETORNA UM 200
 
 
 
@@ -266,11 +266,11 @@ const excluirUsuario = async function (id) {
         let result = await usuarioDAO.deleteUsuario(id)
         if (result) {
 
-            customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_DELETED_ITEM.status
-            customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_DELETED_ITEM.status_code
-            customMessage.DEFAULT_MESSAGE.message = customMessage.SUCCESS_DELETED_ITEM.message
+            customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_DELETED_ITEM.status
+            customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_DELETED_ITEM.status_code
+            customMessage.DEFAULT_MESSAGE_MATHEUS.message = customMessage.SUCCESS_DELETED_ITEM.message
 
-            return customMessage.DEFAULT_MESSAGE // RETORNA UM 200
+            return customMessage.DEFAULT_MESSAGE_MATHEUS // RETORNA UM 200
 
 
         } else {

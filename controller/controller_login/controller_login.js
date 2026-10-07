@@ -55,11 +55,11 @@ const fazerLogin = async function (dados, contentType) {
                         // Nunca devolver a senha (nem o hash) na resposta.
                         delete usuario.senha
 
-                        customMessage.DEFAULT_MESSAGE.status = customMessage.SUCCESS_RESPONSE.status
-                        customMessage.DEFAULT_MESSAGE.status_code = customMessage.SUCCESS_RESPONSE.status_code
-                        customMessage.DEFAULT_MESSAGE.response.dados = usuario
-                        customMessage.DEFAULT_MESSAGE.response.token = token
-                        return customMessage.DEFAULT_MESSAGE // RETORNA UM 200
+                        customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_RESPONSE.status
+                        customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_RESPONSE.status_code
+                        customMessage.DEFAULT_MESSAGE_MATHEUS.response.dados = usuario
+                        customMessage.DEFAULT_MESSAGE_MATHEUS.response.token = token
+                        return customMessage.DEFAULT_MESSAGE_MATHEUS // RETORNA UM 200
 
                     } else {
                         return customMessage.ERROR_UNAUTHORIZED // RETORNA UM 401

@@ -7,10 +7,30 @@
 
 
 // Função para padronizar as messagens da API.
-const DEFAULT_MESSAGE = {
+const DEFAULT_MESSAGE_MATHEUS = {
     api_description: 'API para controlar projetos do TCC - OROSCORP',
     development: 'Matheus Lucas de Freitas Zacarias',
-    version: '1.0.4.26',
+    version: '1.0.10.26',
+    status: Boolean,
+    status_code: Number,
+    response: {}
+}
+
+// Função para padronizar as messagens da API.
+const DEFAULT_MESSAGE_NATHAN = {
+    api_description: 'API para controlar projetos do TCC - OROSCORP',
+    development: 'NATHAN',
+    version: '1.0.10.26',
+    status: Boolean,
+    status_code: Number,
+    response: {}
+}
+
+// Função para padronizar as messagens da API.
+const DEFAULT_MESSAGE_ESTEPHANO = {
+    api_description: 'API para controlar projetos do TCC - OROSCORP',
+    development: 'ESTEPHANO',
+    version: '1.0.10.26',
     status: Boolean,
     status_code: Number,
     response: {}
@@ -47,7 +67,9 @@ const ERROR_FORBIDDEN = {status: false, status_code: 403, message: 'Voce nao tem
 
 
 module.exports = {
-    DEFAULT_MESSAGE,
+    DEFAULT_MESSAGE_MATHEUS,
+    DEFAULT_MESSAGE_NATHAN,
+    DEFAULT_MESSAGE_ESTEPHANO,
     ERROR_BAD_REQUEST,
     ERROR_CONTENT_TYPE,
     ERROR_INTERNAL_SERVER_MODEL,
