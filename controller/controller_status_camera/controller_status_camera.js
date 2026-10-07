@@ -1,9 +1,9 @@
-/*****************************************************************************************************************
- * Objetivo: Arquivo responsável pela validação, tratamento, manipulação de dados para realizar o CRUD do nivel de acesso
+/***********************************************************************************************************************
+ * Objetivo: Arquivo responsável pela validação, tratamento, manipulação de dados para realizar o CRUD do status câmera
  * Data: 2026/10/01
  * Autor: Matheus Lucas
  * Versão: 1.0
- ******************************************************************************************************************/
+ ************************************************************************************************************************/
 
 // Import do arquivo de configurações de mensagens do projeto.
 const configMessages = require('../modulo/configMessages.js')
@@ -154,9 +154,9 @@ const buscarStatusCamera = async function (id) {
     let customMessage = JSON.parse(JSON.stringify(configMessages))
 
     try {
-
+        console.log(id)
         if (id == undefined || String(id).replaceAll(' ', '') == '' || id == null || isNaN(id) || id <= 0) {
-            customMessage.ERROR_BAD_REQUEST.field = '[ID] INVÁLIDO'
+            customMessage.ERROR_BAD_REQUEST.field = '[ID STATUS CÂMERA] INVÁLIDO'
             return customMessage.ERROR_BAD_REQUEST // RETORNA UM 400
 
         } else {
