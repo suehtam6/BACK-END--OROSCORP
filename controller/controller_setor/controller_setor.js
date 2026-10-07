@@ -178,11 +178,11 @@ const listarSetor = async function () {
 
 const buscarSetor = async function (id) {
     let customMessage = JSON.parse(JSON.stringify(configMessages))
-
+    
     try {
 
         if (id == undefined || String(id).replaceAll(' ', '') == '' || id == null || isNaN(id) || id <= 0) {
-            customMessage.ERROR_BAD_REQUEST.field = '[ID] INVÁLIDO'
+            customMessage.ERROR_BAD_REQUEST.field = '[ID SETOR] INVÁLIDO'
             return customMessage.ERROR_BAD_REQUEST // RETORNA UM 400
 
         } else {
