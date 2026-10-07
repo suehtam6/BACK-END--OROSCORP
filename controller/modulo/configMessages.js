@@ -19,7 +19,7 @@ const DEFAULT_MESSAGE_MATHEUS = {
 // Função para padronizar as messagens da API.
 const DEFAULT_MESSAGE_NATHAN = {
     api_description: 'API para controlar projetos do TCC - OROSCORP',
-    development: 'NATHAN',
+    development: 'Nathan Proença de Luna',
     version: '1.0.10.26',
     status: Boolean,
     status_code: Number,
