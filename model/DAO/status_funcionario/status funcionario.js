@@ -43,7 +43,7 @@ const updateStatusFuncionario = async function(dados){
                     where id = ${dados.id}
                     ;`
         
-        let result = knexConection.raw(sql)
+        let result = await knexConection.raw(sql)
 
         if(result){
             return true
@@ -60,15 +60,18 @@ const selectAllStatusFuncionario = async function(){
     try {
         let sql = `select * from tbl_status_funcionario order by id desc`
 
-        let result = knexConection.raw(sql)
+        let result = await knexConection.raw(sql)
 
-        if(result){
+        if(Array.isArray(result)){
             return result[0]
         }else{
             return false
         }
 
+        
     } catch (error) {
+        console.log(error);
+        
         return false
     }
 }
@@ -76,9 +79,9 @@ const selectAllStatusFuncionario = async function(){
 const selectByIdStatosFuncionario = async function(id){
     try {
         
-        let sql = `select * from tbl_usuario where id = ${id};`
+        let sql = `select * from tbl_status_funcionario where id = ${id};`
 
-        let result = knexConection.raw(sql)
+        let result = await knexConection.raw(sql)
 
         if(result){
             return result[0]
@@ -93,9 +96,9 @@ const selectByIdStatosFuncionario = async function(id){
 
 const deleteStatosFuncionario = async function(id){
     try {
-        let sql = `delete from tbl_usuario where id = ${id};`
+        let sql = `delete from tbl_status_funcionario where id = ${id};`
 
-        let result = knexConection.raw(sql)
+        let result = await knexConection.raw(sql)
 
         if(result){
             return true

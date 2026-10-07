@@ -21,7 +21,7 @@ const validarDados = async function(dados){
 }
 
 const tratarDados = async function (dados) {
-    dados.status == dados.status.replaceAll("'", "")
+    dados.status = dados.status.replaceAll("'", "")
 
     return dados
 }
@@ -190,7 +190,7 @@ const listarStatusFuncionario = async function () {
                 return customMessage.ERROR_NOT_FOUND  // RETORNA UM 400
             }
 
-        } else {
+        }else {            
             return customMessage.ERROR_INTERNAL_SERVER_MODEL // RETORNA UM 500 (MODEL)
         }
 
