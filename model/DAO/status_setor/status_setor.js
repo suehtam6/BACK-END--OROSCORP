@@ -72,7 +72,7 @@ const selectAllStatusSetor = async function() {
     }
 }
 
-const selectByIdStatusConta = async function(id) {
+const selectByIdStatusSetor = async function(id) {
     try {
         
         let sql = `select * from tbl_status_setor where id = ${id};`
@@ -90,7 +90,7 @@ const selectByIdStatusConta = async function(id) {
     }
 }
 
-const deleteStatusConta = async function(id) {
+const deleteStatusSetor = async function(id) {
     try {
         
         let sql = `delete from tbl_status_setor where id = ${id};`
@@ -111,6 +111,6 @@ module.exports = {
     insertStatusSetor,
     updateStatusSetor,
     selectAllStatusSetor,
-    selectByIdStatusConta,
-    deleteStatusConta
+    selectByIdStatusSetor,
+    deleteStatusSetor
 }
