@@ -5,8 +5,8 @@ module.exports = {
         connection: {
             host: 'localhost',
             user: 'root', // Substitua pelo seu usuário
-            // password: 'bcd127', // SENHA DO BANCO DE DADOS NA SALA DE QUALQUER WINDOWNS
-            password: '12345678', // SENHA DO BANCO DE DADOS NA SALA DOS MACs
+            password: 'bcd127', // SENHA DO BANCO DE DADOS NA SALA DE QUALQUER WINDOWS
+            // password: '12345678', // SENHA DO BANCO DE DADOS NA SALA DOS MACs
             database: 'db_oroscorp',
             port: 3306, // Porta padrão do MySQL
 
