@@ -56,21 +56,23 @@ const admRouter = require('./routes/adm.router.js')
 app.use('/v1/oroscorp/administrador', cors(), admRouter)
 
 
-// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
+// IMPORT DO ARQUIVO DA ROTA SOBRE O RESPONSAVEL
 const responsavelRouter = require('./routes/responsavel.router.js')
 app.use('/v1/oroscorp/responsavel', cors(), responsavelRouter)
 
 
-// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
+// IMPORT DO ARQUIVO DA ROTA SOBRE O CARGO DO FUNCIONARIO
 const cargoRouter = require('./routes/cargo.router.js')
 app.use('/v1/oroscorp/cargo', cors(), cargoRouter)
 
-// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
+// IMPORT DO ARQUIVO DA ROTA SOBRE O STATUS DO SETOR
 const statusSetorRouter = require('./routes/status_setor.router.js')
 app.use('/v1/oroscorp/status-setor', cors(), statusSetorRouter)
 
 
-
+// IMPORT DO ARQUIVO DA ROTA SOBRE O SETOR
+const setorRouter = require('./routes/setor.router.js')
+app.use('/v1/oroscorp/setor', cors(), setorRouter)
 
 
 

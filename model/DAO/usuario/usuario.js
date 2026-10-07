@@ -3,8 +3,6 @@
  * Data: 2026/10/01
  * Autor: Matheus Lucas
  * Versão: 1.0
- *
- * Caminho sugerido: model/DAO/usuario/usuario.js
  *************************************************************************************/
 
 // Import da biblioteca Knex para manipular dados no Banco de dados MySQL.
