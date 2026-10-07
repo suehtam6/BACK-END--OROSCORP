@@ -72,7 +72,6 @@ const atualizarStatusConta = async function (dados, id, contentType) {
 
                 if(resultBuscarStatusConta){
 
-
                     let validar = await validarDados(await tratarDados(dados))
 
                     if(!validar){

@@ -22,7 +22,6 @@ router.post('/',bodyParserJSON, async function(request, response){
     // Recebendo o body da requisição
      let  dados = request.body
  
- 
      // Recebendo o tipo de dados da requisição para validar se é JSON.
      let contentType = request.headers['content-type']
  

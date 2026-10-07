@@ -56,6 +56,11 @@ const admRouter = require('./routes/adm.router.js')
 app.use('/v1/oroscorp/administrador', cors(), admRouter)
 
 
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS_FUNCIONARIO
+const status_funcionario = require('./routes/status_funcionario.js')
+app.use("/v1/oroscorp/statusfuncionario", cors(), status_funcionario)
+
+
 // IMPORT DO ARQUIVO DA ROTA SOBRE O RESPONSAVEL
 const responsavelRouter = require('./routes/responsavel.router.js')
 app.use('/v1/oroscorp/responsavel', cors(), responsavelRouter)
