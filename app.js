@@ -80,6 +80,10 @@ const setorRouter = require('./routes/setor.router.js')
 app.use('/v1/oroscorp/setor', cors(), setorRouter)
 
 
+// IMPORT DO ARQUIVO DA ROTA SOBRE O STATUS DA CÂMERA
+const statusCameraRouter = require('./routes/status_camera.router.js')
+app.use('/v1/oroscorp/status-camera', cors(), statusCameraRouter)
+
 
 
 
