@@ -41,9 +41,6 @@ app.use('/v1/oroscorp/nivel-acesso', cors(), nivelAcessoRouter)
 const statusContaRouter = require('./routes/status_conta.router.js')
 app.use('/v1/oroscorp/status-conta', cors(), statusContaRouter)
 
-// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA OCORRÊNCIA
-const statusOcorrenciaRouter = require('./routes/status_ocorrencia.router.js')
-app.use('/v1/oroscorp/status-ocorrencia', cors(), statusOcorrenciaRouter)
 
 // IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA CONTA
 const usuarioRouter = require('./routes/usuario.router.js')
@@ -66,6 +63,9 @@ app.use('/v1/oroscorp/responsavel', cors(), responsavelRouter)
 const cargoRouter = require('./routes/cargo.router.js')
 app.use('/v1/oroscorp/cargo', cors(), cargoRouter)
 
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA OCORRÊNCIA
+const statusOcorrenciaRouter = require('./routes/status_ocorrencia.router.js')
+app.use('/v1/oroscorp/status-ocorrencia', cors(), statusOcorrenciaRouter)
 
 // Faz um start na API (Aguardando requisição)
 app.listen(8080, function(){
