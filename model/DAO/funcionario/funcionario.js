@@ -34,7 +34,6 @@ const insertFuncionario = async function(dados) {
                         ${dados.id_cargo},
                         ${dados.id_setor},
                         ${dados.id_status_funcionario}
-
                     );`
         
         let result = await knexConection.raw(sql)
@@ -46,6 +45,7 @@ const insertFuncionario = async function(dados) {
         }
 
     } catch (error) {
+        console.log(error);
         
         return false
     }
@@ -62,7 +62,7 @@ const updateFuncionario = async function(dados) {
                         foto                  = "${dados.foto}",
                         id_cargo              = ${dados.id_cargo},
                         id_setor              = ${dados.id_setor},
-                        id_status_funcionario = ${dados.id_status_funcionario},
+                        id_status_funcionario = ${dados.id_status_funcionario}
                         where id              = ${dados.id};`
         
         let result = await knexConection.raw(sql)
@@ -72,6 +72,7 @@ const updateFuncionario = async function(dados) {
             return false
         }
     } catch (error) {
+        console.log(error);
         
         return false
     }

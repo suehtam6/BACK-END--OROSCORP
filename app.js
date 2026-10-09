@@ -79,6 +79,9 @@ app.use('/v1/oroscorp/status-setor', cors(), statusSetorRouter)
 const setorRouter = require('./routes/setor.router.js')
 app.use('/v1/oroscorp/setor', cors(), setorRouter)
 
+// IMPORT DO ARQUIVO DA ROTA SOBRE O FUNCIONARIO
+const funcionarioRouter = require('./routes/funcionario.router.js')
+app.use('/v1/oroscorp/funcionario', cors(), funcionarioRouter)
 
 
 
