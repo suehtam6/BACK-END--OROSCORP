@@ -48,10 +48,10 @@ const updateCamera = async function(dados) {
     try {
         
         let sql = `update tbl_camera set
-                        nome                = "${dados.nome}"
-                        descricao           = "${dados.descricao}"
-                        endereco_stream     = "${dados.endereco_stream}"
-                        id_setor            =  ${dados.id_setor}
+                        nome                = "${dados.nome}",
+                        descricao           = "${dados.descricao}",
+                        endereco_stream     = "${dados.endereco_stream}",
+                        id_setor            =  ${dados.id_setor},
                         id_status_camera    =  ${dados.id_status_camera}
                         where id = ${dados.id};`
         
@@ -63,7 +63,7 @@ const updateCamera = async function(dados) {
             return false
         }
     } catch (error) {
-        console.log(error)
+       
         return false
     }
 }
