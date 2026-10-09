@@ -89,18 +89,13 @@ const cameraRouter = require('./routes/camera.router.js')
 app.use('/v1/oroscorp/camera', cors(), cameraRouter)
 
 
-
-// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
-const responsavelRouter = require('./routes/responsavel.router.js')
-app.use('/v1/oroscorp/responsavel', cors(), responsavelRouter)
-
-// IMPORT DO ARQUIVO DA ROTA SOBRE O ADM
-const cargoRouter = require('./routes/cargo.router.js')
-app.use('/v1/oroscorp/cargo', cors(), cargoRouter)
-
 // IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA OCORRÊNCIA
 const statusOcorrenciaRouter = require('./routes/status_ocorrencia.router.js')
 app.use('/v1/oroscorp/status-ocorrencia', cors(), statusOcorrenciaRouter)
+
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA OCORRÊNCIA
+const epiRouter = require('./routes/epi.router.js')
+app.use('/v1/oroscorp/epi', cors(), epiRouter)
 
 
 // Faz um start na API (Aguardando requisição)
