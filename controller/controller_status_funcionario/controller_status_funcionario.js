@@ -13,7 +13,7 @@ const validarDados = async function(dados){
     let customMessage = JSON.parse(JSON.stringify(configMessages))
 
     if(dados.status == undefined || dados.status == null || dados.status > 20){
-        return configMessages.ERROR_BAD_REQUEST.field = "[STATOS FUNCIONARIO] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST.field = "[STATOS FUNCIONARIO] INVALIDO"
     }else{
         return false
     }

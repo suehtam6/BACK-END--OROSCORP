@@ -192,8 +192,6 @@ const buscarSetor = async function (id) {
             if (result) {
 
                 if (result.length > 0) {
-
-
                 
                 for (let dados of result) {
                    
