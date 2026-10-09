@@ -61,7 +61,7 @@ const inserirADM = async function (dados, contentType) {
 }
 
 
-const atualizarADM= async function (dados, id, contentType) {
+const atualizarADM = async function (dados, id, contentType) {
     // Fazendo um clone do meu JSON para poder modificar caso seja necessario.
     // Ele converte um objeto para string e depois transforma em um outro objeto.
     let customMessage = JSON.parse(JSON.stringify(configMessages))
@@ -135,7 +135,7 @@ const listarADM = async function () {
 
             if (result.length > 0) {
 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultUsuario = await controllerUsuario.buscarUsuario(dados.id_usuario)
                    
@@ -192,7 +192,7 @@ const buscarADM = async function (id) {
 
 
                 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultUsuario = await controllerUsuario.buscarUsuario(dados.id_usuario)
                     console.log(resultUsuario)

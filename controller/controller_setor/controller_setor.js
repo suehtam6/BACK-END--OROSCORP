@@ -138,7 +138,7 @@ const listarSetor = async function () {
 
             if (result.length > 0) {
 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultStatusSetor = await controllerStatusSetor.buscarStatusSetor(dados.id_status_setor)
 
@@ -195,7 +195,7 @@ const buscarSetor = async function (id) {
 
 
                 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     
 

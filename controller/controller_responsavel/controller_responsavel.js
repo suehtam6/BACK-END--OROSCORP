@@ -136,7 +136,7 @@ const listarResponsavel = async function () {
 
             if (result.length > 0) {
 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultUsuario = await controllerUsuario.buscarUsuario(dados.id_usuario)
                    
@@ -193,7 +193,7 @@ const buscarResponsavel = async function (id) {
 
 
                 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultUsuario = await controllerUsuario.buscarUsuario(dados.id_usuario)
                     console.log(resultUsuario)

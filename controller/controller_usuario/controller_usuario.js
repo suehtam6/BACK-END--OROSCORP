@@ -139,7 +139,7 @@ const listarUsuario = async function () {
 
             if (result.length > 0) {
 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultUsuarioNivelAcesso = await controllerNivelAcesso.buscarNivelAcesso(dados.id_nivel_acesso)
 
@@ -206,7 +206,7 @@ const buscarUsuario = async function (id) {
 
 
                 
-                for (dados of result) {
+                for (let dados of result) {
                    
                     let resultUsuarioNivelAcesso = await controllerNivelAcesso.buscarNivelAcesso(dados.id_nivel_acesso)
 
