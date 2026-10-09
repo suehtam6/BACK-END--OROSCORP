@@ -130,16 +130,17 @@ const listarCamera = async function () {
     try {
 
         let result = await cameraDAO.selectAllCamera()
-        console.log(result)
+        
 
         if (result) {
 
             if (result.length > 0) {
 
-                for (dados of result) {
-                   
-                    let resultSetor = await controllerSetor.buscarSetor(dados.id_setor)
+                for (let dados of result) {
 
+                        
+                    let resultSetor = await controllerSetor.buscarSetor(dados.id_setor)
+                    
                     if (resultSetor.status) {
                         dados.setor = resultSetor.response.dados
 
@@ -148,9 +149,9 @@ const listarCamera = async function () {
                         return resultSetor
                     }
 
-
+                    
                     let resultStatusCamera = await controllerStatusCamera.buscarStatusCamera(dados.id_status_camera)
-
+                    
                     if (resultStatusCamera.status) {
                         dados.status_camera = resultStatusCamera.response.dados
 
@@ -202,11 +203,11 @@ const buscarCamera = async function (id) {
                 if (result.length > 0) {
 
 
-                
-                    for (dados of result) {
-                   
+                    for (let dados of result) {
+
+                        
                         let resultSetor = await controllerSetor.buscarSetor(dados.id_setor)
-    
+                        
                         if (resultSetor.status) {
                             dados.setor = resultSetor.response.dados
     
@@ -215,9 +216,9 @@ const buscarCamera = async function (id) {
                             return resultSetor
                         }
     
-    
+                        
                         let resultStatusCamera = await controllerStatusCamera.buscarStatusCamera(dados.id_status_camera)
-    
+                        
                         if (resultStatusCamera.status) {
                             dados.status_camera = resultStatusCamera.response.dados
     

@@ -178,7 +178,7 @@ const listarSetor = async function () {
 
 const buscarSetor = async function (id) {
     let customMessage = JSON.parse(JSON.stringify(configMessages))
-    
+
     try {
 
         if (id == undefined || String(id).replaceAll(' ', '') == '' || id == null || isNaN(id) || id <= 0) {
