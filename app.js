@@ -100,6 +100,9 @@ app.use('/v1/oroscorp/status-ocorrencia', cors(), statusOcorrenciaRouter)
 const epiRouter = require('./routes/epi.router.js')
 app.use('/v1/oroscorp/epi', cors(), epiRouter)
 
+//IMPORT DO ARQUIVO DE ROTAS SOBRE O STATUS DA IA
+const iaAlerta = require('./routes/ia.router.js')
+app.use('/v1/oroscorp/ia/alertas', cors(), iaAlerta)
 
 // Faz um start na API (Aguardando requisição)
 app.listen(8080, function(){
