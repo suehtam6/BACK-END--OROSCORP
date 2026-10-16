@@ -9,8 +9,8 @@ const configMessages = require("../../controller/modulo/configMessages")
 
 const ocorrenciaDAO = require("../../model/DAO/ocorrencia/ocorrencia.js")
 const controller_setor = require("../controller_setor/controller_setor.js")
-const controllerFuncionario = require("../controller_funcionario")
-const controllerMotivo_ocorrencia = require ("../comtroller_motivo_ocorrencia/comtroller_motivo_ocorrencia.js")
+const controllerFuncionario = require("../controller_funcionario/controller_funcionario.js")
+const controllerMotivo_ocorrencia = require ("../controller_motivo_ocorrencia/motivo_ocorrencia.js")
 const controller_status_ocorrencia = require("../controller_status_ocorrencia/controller_status_ocorrencia.js")
 const controller_usuario_registro = require("../controller_usuario/controller_usuario.js")
 
@@ -102,25 +102,25 @@ const listarOcorrencia = async function () {
 
                 for (let dados of result) {
                    
-                    let resultIdSetor = await controller_setor.buscarCargo(dados.id_cargo)
+                    let resultIdSetor = await controller_setor.buscarSetor(dados.id_setor)
 
                     if (resultIdSetor.status) {
-                        dados.cargo = resultIdSetor.response.dados
+                        dados.setor = resultIdSetor.response.dados
 
-                        delete dados.id_cargo
+                        delete dados.id_setor
                     } else {
                         return resultIdSetor
                     }
 
 
-                    let resultSetorFuncionario = await controllerSetor.buscarSetor(dados.id_setor)
+                    let resultFuncionario = await controllerFuncionario.buscarFunfionario(dados.id_funcionario)
 
-                    if (resultSetorFuncionario.status) {
-                        dados.setor = resultSetorFuncionario.response.dados
+                    if (resultFuncionario.status) {
+                        dados.setor = resultFuncionario.response.dados
 
                         delete dados.id_setor
                     } else {
-                        return resultSetorFuncionario
+                        return resultFuncionario
                     }
 
                     let resultStatusFuncionario = await controllerStatusFuncionario.buscarStatusFunfionario(dados.id_status_funcionario)
