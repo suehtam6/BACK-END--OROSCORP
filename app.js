@@ -100,6 +100,12 @@ app.use('/v1/oroscorp/status-ocorrencia', cors(), statusOcorrenciaRouter)
 const epiRouter = require('./routes/epi.router.js')
 app.use('/v1/oroscorp/epi', cors(), epiRouter)
 
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O SETOR E RESPONSAVEL
+const setorResponsavelRouter = require('./routes/setor_responsavel.router.js')
+app.use('/v1/oroscorp/setor-responsavel', cors(), setorResponsavelRouter)
+
+
+
 
 // Faz um start na API (Aguardando requisição)
 app.listen(8080, function(){
