@@ -25,7 +25,6 @@ const inserirmotivo_ocorrencia = async function (dados, contentType) {
             if (!validar) {
 
                 let result = await motivo_ocorrenciaDAO.insertMotivoOcorrencia(await tratarDados(dados))
-                console.log(result)
                 if (result) {
                     dados.id = result
 
@@ -50,7 +49,6 @@ const inserirmotivo_ocorrencia = async function (dados, contentType) {
         }
 
     } catch (error) {
-        console.log(error)
         return customMessage.ERROR_INTERNAL_SERVER_CONTROLLER // RETORNA UM 500 (Controller)
     }
 
@@ -219,6 +217,7 @@ const excluirmotivo_ocorrencia = async function (id) {
 }
 
 const validarDados = async function (dados) {
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
     if (dados.nome == undefined || dados.nome == '' || dados.nome == null || dados.nome.length > 20) {
         customMessage.ERROR_BAD_REQUEST.field = '[NOME MOTIVO_OCORRENCIA] INVÁLIDO'
         return customMessage.ERROR_BAD_REQUEST

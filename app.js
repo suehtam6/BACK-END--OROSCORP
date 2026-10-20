@@ -103,6 +103,10 @@ app.use('/v1/oroscorp/epi', cors(), epiRouter)
 const motivo_ocorrenciaRouter = require('./routes/motivo_ocorrencia.router.js')
 app.use('/v1/oroscorp/motivo_ocorrencia', cors(), motivo_ocorrenciaRouter)
 
+const ocorrenciaRouter = require('./routes/ocorrencia.router.js')
+app.use('/v1/oroscorp/ocorrencia', cors(), ocorrenciaRouter)
+
+
 
 // Faz um start na API (Aguardando requisição)
 app.listen(8080, function(){

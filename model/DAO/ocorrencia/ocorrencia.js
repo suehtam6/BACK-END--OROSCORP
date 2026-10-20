@@ -18,15 +18,13 @@ const insertOcorrencia = async function(dados) {
         
         let sql = `insert into tbl_ocorrencia(
             descricao, 
-            data_hora,
             id_setor,
             id_funcionario,
             id_motivo_ocorrencia,
             id_status_ocorrencia,
-            id_usuario_registro,
+            id_usuario_registro
         ) values(  
             '${dados.descricao}',
-            '${dados.data_hora}',
              ${dados.id_setor}, 
              ${dados.id_funcionario}, 
              ${dados.id_motivo_ocorrencia}, 
@@ -43,7 +41,7 @@ const insertOcorrencia = async function(dados) {
             return false
         }
 
-    } catch (error) {        
+    } catch (error) {  
         return false
     }
 }
@@ -71,13 +69,11 @@ const updateOcorrencia = async function(dados) {
         
         let sql = `update tbl_ocorrencia set
                         descricao = "${dados.descricao}",
-                        data_hora = "${dados.data_hora}",
                         id_setor = ${dados.id_setor},
                         id_funcionario = ${dados.id_funcionario},
                         id_motivo_ocorrencia = ${dados.id_motivo_ocorrencia},
                         id_status_ocorrencia = ${dados.id_status_ocorrencia},
-                        id_usuario_registro = ${dados.id_usuario_registro},
-                        id_usuario_identificacao = ${dados.id_usuario_identificacao}
+                        id_usuario_registro = ${dados.id_usuario_registro}
                         where id = ${dados.id}
                     ;`
         
@@ -88,7 +84,6 @@ const updateOcorrencia = async function(dados) {
             return false
         }
     } catch (error) {
-        console.log(error);
         
         return false
     }
@@ -112,7 +107,7 @@ const selectByIdOcorrencia = async function(id) {
     }
 }
 
-const deleteFuncionario = async function(id) {
+const deleteOcorrencia = async function(id) {
     try {
         
         let sql = `delete from tbl_ocorrencia where id = ${id};`
@@ -134,5 +129,5 @@ module.exports = {
     selectAllOcorrencia,
     updateOcorrencia,
     selectByIdOcorrencia,
-    deleteFuncionario
+    deleteOcorrencia
 }
