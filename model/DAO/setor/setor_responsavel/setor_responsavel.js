@@ -9,7 +9,7 @@
 const knex = require('knex')
 
 // Import do arquivo para configuração para acesso ao banco de dados.
-const knexDataBaseConfig = require('../../database_config/knexConfig.js')
+const knexDataBaseConfig = require('../../../database_config/knexConfig.js')
 
 // Criar a conexão com o banco de dados mySQL conforme o arquivo de configuração.
 const knexConection = knex(knexDataBaseConfig.development)
@@ -43,12 +43,12 @@ const updateSetorResponsavel = async function(dados) {
     try {
         
         let sql = `update tbl_setor_responsavel set
-                        id_setor        = ${dados.id_setor}
+                        id_setor        = ${dados.id_setor},
                         id_responsavel  = ${dados.id_responsavel}
                         where id = ${dados.id};`
         
         let result = await knexConection.raw(sql)
-
+        
         if(result){
             return true
         }else{
@@ -97,10 +97,10 @@ const selectByIdSetorResponsavel = async function(id) {
 const selectBySetorIdResponsavel = async function(id_responsavel) {
     try {
         
-        let sql = `select tbl_setor.id, tbl_setor.nome as nome_setor, tbl_setor.descricao as descricao_setor, tbl_setor.foto as foto_setor,
+        let sql = `select tbl_setor.id as id_setor, tbl_setor.nome as nome_setor, tbl_setor.descricao as descricao_setor, tbl_setor.foto as foto_setor,
                         tbl_setor.local as local_setor,
                         tbl_status_setor.status as status_setor,
-                        tbl_responsavel.id, tbl_responsavel.cpf,
+                        tbl_responsavel.id as id_responsavel, tbl_responsavel.cpf,
                         tbl_usuario.nome as nome_usuario, tbl_usuario.email as email_usuario, tbl_usuario.foto as foto_usuario,
                         tbl_usuario.data_nascimento, tbl_usuario.id_nivel_acesso, tbl_usuario.id_status_conta,
                         tbl_nivel_acesso.nome as nivel_acesso, tbl_status_conta.status as status_conta
@@ -117,7 +117,7 @@ const selectBySetorIdResponsavel = async function(id_responsavel) {
                         on tbl_nivel_acesso.id = tbl_usuario.id_nivel_acesso
                     inner join tbl_status_conta 
                         on tbl_status_conta.id = tbl_usuario.id_status_conta
-                    where tbl_setor_responsavel.id_responsavel = ${id};`
+                    where tbl_setor_responsavel.id_responsavel = ${id_responsavel};`
 
         let result = await knexConection.raw(sql)
 
@@ -135,10 +135,10 @@ const selectBySetorIdResponsavel = async function(id_responsavel) {
 const selectByResponsavelIdSetor = async function(id_setor) {
     try {
         
-        let sql = `select tbl_setor.id, tbl_setor.nome as nome_setor, tbl_setor.descricao as descricao_setor, tbl_setor.foto as foto_setor,
+        let sql = `select tbl_setor.id as id_setor, tbl_setor.nome as nome_setor, tbl_setor.descricao as descricao_setor, tbl_setor.foto as foto_setor,
                         tbl_setor.local as local_setor,
                         tbl_status_setor.status as status_setor,
-                        tbl_responsavel.id, tbl_responsavel.cpf,
+                        tbl_responsavel.id as id_responsavel, tbl_responsavel.cpf,
                         tbl_usuario.nome as nome_usuario, tbl_usuario.email as email_usuario, tbl_usuario.foto as foto_usuario,
                         tbl_usuario.data_nascimento, tbl_usuario.id_nivel_acesso, tbl_usuario.id_status_conta,
                         tbl_nivel_acesso.nome as nivel_acesso, tbl_status_conta.status as status_conta
@@ -155,7 +155,7 @@ const selectByResponsavelIdSetor = async function(id_setor) {
                         on tbl_nivel_acesso.id = tbl_usuario.id_nivel_acesso
                     inner join tbl_status_conta 
                         on tbl_status_conta.id = tbl_usuario.id_status_conta
-                    where tbl_setor_responsavel.id_setor = ${id};`
+                    where tbl_setor_responsavel.id_setor = ${id_setor};`
 
         let result = await knexConection.raw(sql)
 
@@ -190,7 +190,7 @@ const deleteSetorResponsavel = async function(id) {
 
 module.exports = {
     insertSetorResponsavel,
-    updateSetorResponsavel,
+    updateSetorResponsavel, 
     selectAllSetorResponsavel,
     selectByIdSetorResponsavel,
     selectByResponsavelIdSetor,

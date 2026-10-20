@@ -106,6 +106,15 @@ app.use('/v1/oroscorp/motivo_ocorrencia', cors(), motivo_ocorrenciaRouter)
 const ocorrenciaRouter = require('./routes/ocorrencia.router.js')
 app.use('/v1/oroscorp/ocorrencia', cors(), ocorrenciaRouter)
 
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O SETOR E RESPONSAVEL
+const setorResponsavelRouter = require('./routes/setor_responsavel.router.js')
+app.use('/v1/oroscorp/setor-responsavel', cors(), setorResponsavelRouter)
+
+
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O SETOR E RESPONSAVEL
+const ocorrenciaEPIRouter = require('./routes/ocorrencia_epi.router.js')
+app.use('/v1/oroscorp/ocorrencia-epi', cors(), ocorrenciaEPIRouter)
+
 
 
 // Faz um start na API (Aguardando requisição)

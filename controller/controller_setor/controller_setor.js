@@ -211,7 +211,6 @@ const buscarSetor = async function (id) {
 
                 }
 
-
                     customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_RESPONSE.status
                     customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_RESPONSE.status_code
                     customMessage.DEFAULT_MESSAGE_MATHEUS.response.dados = result
@@ -232,6 +231,7 @@ const buscarSetor = async function (id) {
         }
 
     } catch (error) {
+        
         return customMessage.ERROR_INTERNAL_SERVER_CONTROLLER // RETORNA UM 500 (CONTROLLER)
     }
 
