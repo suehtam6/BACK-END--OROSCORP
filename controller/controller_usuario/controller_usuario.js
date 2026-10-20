@@ -193,7 +193,7 @@ const buscarUsuario = async function (id) {
     try {
 
         if (id == undefined || String(id).replaceAll(' ', '') == '' || id == null || isNaN(id) || id <= 0) {
-            customMessage.ERROR_BAD_REQUEST.field = '[ID] INVÁLIDO'
+            customMessage.ERROR_BAD_REQUEST.field = '[ID USUARIO] INVÁLIDO'
             return customMessage.ERROR_BAD_REQUEST // RETORNA UM 400
 
         } else {
