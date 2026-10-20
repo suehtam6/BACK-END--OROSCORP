@@ -115,6 +115,10 @@ app.use('/v1/oroscorp/setor-responsavel', cors(), setorResponsavelRouter)
 const ocorrenciaEPIRouter = require('./routes/ocorrencia_epi.router.js')
 app.use('/v1/oroscorp/ocorrencia-epi', cors(), ocorrenciaEPIRouter)
 
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O SETOR E RESPONSAVEL
+const ocorrenciaCameraRouter = require('./routes/ocorrencia_camera.router.js')
+app.use('/v1/oroscorp/ocorrencia-camera', cors(), ocorrenciaCameraRouter)
+
 
 
 // Faz um start na API (Aguardando requisição)

@@ -12,7 +12,7 @@ const configMessages = require('../modulo/configMessages.js')
 const ocorrenciaEPIDAO = require('../../model/DAO/ocorrencia_epi/ocorrencia_epi.js')
 
 // Import das controllers
-const controller_ocorrencia = require('../controller_ocorrencia/controller_ocorrencia.js')
+const controller_ocorrencia = require('../comtroller_ocorrencia/controller_ocorrencia.js')
 const controller_epi = require('../controller_epi/controller_epi.js')
 
 
