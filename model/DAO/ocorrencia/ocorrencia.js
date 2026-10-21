@@ -18,14 +18,14 @@ const insertOcorrencia = async function(dados) {
         
         let sql = `insert into tbl_ocorrencia(
             descricao, 
-            id_setor,
+            id_ocorrencia,
             id_funcionario,
             id_motivo_ocorrencia,
             id_status_ocorrencia,
             id_usuario_registro
         ) values(  
             '${dados.descricao}',
-             ${dados.id_setor}, 
+             ${dados.id_ocorrencia}, 
              ${dados.id_funcionario}, 
              ${dados.id_motivo_ocorrencia}, 
              ${dados.id_status_ocorrencia}, 
@@ -63,13 +63,37 @@ const selectAllOcorrencia = async function() {
     }
 }
 
+const selectDadosByIdOcorrencia = async function(id) {
+
+    try {
+        
+        let sql = `CALL sp_buscar_ocorrencia(${id});`
+
+
+            let result = await knexConection.raw(sql)
+
+            if(Array.isArray(result)){
+                return result[0][0]
+            }else{
+
+                return false
+            }
+            
+
+    } catch (error) {
+        return false
+    }
+    
+}
+
+
 
 const updateOcorrencia = async function(dados) {
     try {
         
         let sql = `update tbl_ocorrencia set
                         descricao = "${dados.descricao}",
-                        id_setor = ${dados.id_setor},
+                        id_ocorrencia = ${dados.id_ocorrencia},
                         id_funcionario = ${dados.id_funcionario},
                         id_motivo_ocorrencia = ${dados.id_motivo_ocorrencia},
                         id_status_ocorrencia = ${dados.id_status_ocorrencia},
@@ -129,5 +153,6 @@ module.exports = {
     selectAllOcorrencia,
     updateOcorrencia,
     selectByIdOcorrencia,
+    selectDadosByIdOcorrencia,
     deleteOcorrencia
 }
