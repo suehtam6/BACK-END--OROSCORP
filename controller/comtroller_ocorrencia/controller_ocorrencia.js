@@ -287,6 +287,42 @@ const buscarOcorrencia = async function (id) {
     }
 }
 
+const buscarDadosIdOcorrencia = async function (IdOcorrencia) {
+    let customMessage = JSON.parse(JSON.stringify(configMessages))
+
+    try {
+        if (IdOcorrencia == undefined || String(IdOcorrencia).replaceAll(' ', '') == '' || IdOcorrencia == null || isNaN(IdOcorrencia) || IdOcorrencia <= 0) {
+            customMessage.ERROR_BAD_REQUEST.field = '[ID_ocorrencia] INVÁLIDO'
+            return customMessage.ERROR_BAD_REQUEST // RETORNA UM 400
+        } else {
+
+            let result = await ocorrenciaDAO.selectDadosByIdOcorrencia(IdOcorrencia)
+            if (result) {
+
+                if (result.length > 0) {
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.status = customMessage.SUCCESS_RESPONSE.status
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.status_code = customMessage.SUCCESS_RESPONSE.status_code
+                    customMessage.DEFAULT_MESSAGE_MATHEUS.response.ocorrencia = result
+
+                    return customMessage.DEFAULT_MESSAGE_MATHEUS // RETORNA UM 200
+                } else {
+                    return customMessage.ERROR_NOT_FOUND // RETORNA UM 404
+                }
+
+            } else {
+                return customMessage.ERROR_INTERNAL_SERVER_MODEL // RETORNA UM 500 (MODEL)
+            }
+
+        }
+    } catch (error) {
+        return customMessage.ERROR_INTERNAL_SERVER_CONTROLLER // RETORNA UM 500 (CONTROLLER)
+    }
+}
+
+
+
+
+
 const atualizarOcorrencia = async function (dados, id, contentType) {
     // Fazendo um clone do meu JSON para poder modificar caso seja necessario.
     // Ele converte um objeto para string e depois transforma em um outro objeto.
@@ -376,6 +412,7 @@ module.exports = {
     inserirOcorrencia,
     listarOcorrencia,
     buscarOcorrencia,
+    buscarDadosIdOcorrencia,
     atualizarOcorrencia,
     excluirOcorrencia
 }

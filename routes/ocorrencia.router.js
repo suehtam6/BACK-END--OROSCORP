@@ -48,6 +48,16 @@ router.get('/:id', async function(request, response) {
      response.status(result.status_code)
      response.json(result)
  })
+
+ //PARA O INNER JOIN DE BUSCAR OS DADOS GERAL
+ router.get('/dados/:id', async function(request, response) {
+    let id = request.params.id
+
+    let result = await controllerOcorrencia.buscarDadosIdOcorrencia(id)
+
+    response.status(result.status_code)
+    response.json(result)
+})
  
 router.put('/:id', bodyParserJSON, async function(request, response) {
  
