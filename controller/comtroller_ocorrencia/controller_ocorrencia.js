@@ -14,29 +14,39 @@ const controllerMotivo_ocorrencia = require ("../controller_motivo_ocorrencia/mo
 const controller_status_ocorrencia = require("../controller_status_ocorrencia/controller_status_ocorrencia.js")
 const controller_usuario_registro = require("../controller_usuario/controller_usuario.js")
 
-const validarDados = async function(dados){
+
+const idInvalido = (valor) =>
+    String(valor).trim() === '' || isNaN(valor) || Number(valor) <= 0
+
+const validarDados = async function (dados) {
     let customMessage = JSON.parse(JSON.stringify(configMessages))
 
-    if(dados.descricao == undefined || dados.descricao == null || dados.descricao.length > 500){
-         customMessage.ERROR_BAD_REQUEST.field = "[DESCRIÇÃO OCORRENCIA] INVALIDO"
-         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_setor == undefined || dados.id_setor == null || String(dados.id_setor).replaceAll(' ', '') == ''  || dados.id_setor == "" || isNaN(dados.id_setor) || dados.id_setor <= 0){
-         customMessage.ERROR_BAD_REQUEST.field = "[ID SETOR OCORREINCIA] INVALIDO"
-         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_funcionario == undefined || dados.id_funcionario == null || String(dados.id_funcionario).replaceAll(' ', '') == ''  || dados.id_funcionario == "" || isNaN(dados.id_funcionario) || dados.id_funcionario <= 0){
-         customMessage.ERROR_BAD_REQUEST.field = "[ID FUNCIONARIO OCORRENCIA] INVALIDO"
-         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_motivo_ocorrencia == undefined || dados.id_motivo_ocorrencia == null || String(dados.id_motivo_ocorrencia).replaceAll(' ', '') == ''  || dados.id_motivo_ocorrencia == "" || isNaN(dados.id_motivo_ocorrencia) || dados.id_motivo_ocorrencia <= 0){
-         customMessage.ERROR_BAD_REQUEST.field = "[ID MOTIVO DA OCORRENCIA] INVALIDO"
-         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_status_ocorrencia == undefined || dados.id_status_ocorrencia == null || String(dados.id_status_ocorrencia).replaceAll(' ', '') == ''  || dados.id_status_ocorrencia == "" || isNaN(dados.id_status_ocorrencia) || dados.id_status_ocorrencia <= 0){
-         customMessage.ERROR_BAD_REQUEST.field = "[ID STATUS OCORRENCIA] INVALIDO"
-         return customMessage.ERROR_BAD_REQUEST
-    }else if(dados.id_usuario_registro == undefined || dados.id_usuario_registro == null || String(dados.id_usuario_registro).replaceAll(' ', '') == ''  || dados.id_usuario_registro == "" || isNaN(dados.id_usuario_registro) || dados.id_usuario_registro <= 0){
-         customMessage.ERROR_BAD_REQUEST.field = "[ID USUARIO DE REGISTRO OCORRENCIA] INVALIDO"
-         return customMessage.ERROR_BAD_REQUEST
+    if (dados.descricao == undefined || dados.descricao == null || String(dados.descricao).trim() == '' || dados.descricao.length > 500) {
+        customMessage.ERROR_BAD_REQUEST.field = "[DESCRIÇÃO OCORRENCIA] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST
 
-    }else{
+    } else if (dados.id_setor == null || idInvalido(dados.id_setor)) {
+        customMessage.ERROR_BAD_REQUEST.field = "[ID SETOR OCORRENCIA] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST
+
+    } else if (dados.id_motivo_ocorrencia == null || idInvalido(dados.id_motivo_ocorrencia)) {
+        customMessage.ERROR_BAD_REQUEST.field = "[ID MOTIVO DA OCORRENCIA] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST
+
+    } else if (dados.id_status_ocorrencia == null || idInvalido(dados.id_status_ocorrencia)) {
+        customMessage.ERROR_BAD_REQUEST.field = "[ID STATUS OCORRENCIA] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST
+
+        // AQUI EU SO IREI VALIDAR OS QUE NÃO FOREM NULL
+    } else if (dados.id_funcionario != null && idInvalido(dados.id_funcionario)) {
+        customMessage.ERROR_BAD_REQUEST.field = "[ID FUNCIONARIO OCORRENCIA] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST
+
+    } else if (dados.id_usuario_registro != null && idInvalido(dados.id_usuario_registro)) {
+        customMessage.ERROR_BAD_REQUEST.field = "[ID USUARIO DE REGISTRO OCORRENCIA] INVALIDO"
+        return customMessage.ERROR_BAD_REQUEST
+
+    } else {
         return false
     }
 }
@@ -52,7 +62,7 @@ const inserirOcorrencia = async function(dados, contentType){
     try {
         if (String(contentType).toUpperCase() == 'APPLICATION/JSON') {
                     let validar = await validarDados(dados)
-        
+                    
                     if (!validar) {
         
                         let result = await ocorrenciaDAO.insertOcorrencia(await tratarDados(dados))
