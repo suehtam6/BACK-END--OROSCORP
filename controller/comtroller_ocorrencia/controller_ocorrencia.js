@@ -109,7 +109,7 @@ const listarOcorrencia = async function () {
                     }
 
                     let resultFuncionario = await controllerFuncionario.buscarFunfionario(dados.id_funcionario)
-                        console.log(resultFuncionario)
+                        
                     if (resultFuncionario.status) {
                         dados.funcionario = resultFuncionario.response.dados
 
@@ -207,7 +207,7 @@ const buscarOcorrencia = async function (id) {
                     }
 
                     let resultFuncionario = await controllerFuncionario.buscarFunfionario(dados.id_funcionario)
-                        console.log(resultFuncionario)
+                       
                     if (resultFuncionario.status) {
                         dados.funcionario = resultFuncionario.response.dados
 

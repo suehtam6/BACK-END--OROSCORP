@@ -138,7 +138,7 @@ const listarOcorrenciaEPI = async function () {
 
                 for(let dados of result){
 
-                    let resultOcorrencia = await controller_ocorrencia.buscarOcorrencia(id_ocorrencia)
+                    let resultOcorrencia = await controller_ocorrencia.buscarOcorrencia(dados.id_ocorrencia)
 
                     if(resultOcorrencia.status){
                         dados.ocorrencia = resultOcorrencia.response.dados
@@ -150,7 +150,7 @@ const listarOcorrenciaEPI = async function () {
 
 
 
-                    let resultEPI = await controller_epi.buscarEPI(id_epi)
+                    let resultEPI = await controller_epi.buscarEPI(dados.id_epi)
 
                     if(resultEPI.status){
                         dados.epi = resultEPI.response.dados
@@ -201,8 +201,8 @@ const buscarOcorrenciaEPI = async function (id) {
                 if (result.length > 0) {
 
                     for(let dados of result){
-
-                        let resultOcorrencia = await controller_ocorrencia.buscarOcorrencia(id_ocorrencia)
+                        let resultOcorrencia = await controller_ocorrencia.buscarOcorrencia(dados.id_ocorrencia)
+                        
     
                         if(resultOcorrencia.status){
                             dados.ocorrencia = resultOcorrencia.response.dados
@@ -214,7 +214,7 @@ const buscarOcorrenciaEPI = async function (id) {
     
     
     
-                        let resultEPI = await controller_epi.buscarEPI(id_epi)
+                        let resultEPI = await controller_epi.buscarEPI(dados.id_epi)
     
                         if(resultEPI.status){
                             dados.epi = resultEPI.response.dados
