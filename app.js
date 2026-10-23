@@ -120,7 +120,9 @@ app.use('/v1/oroscorp/ocorrencia-epi', cors(), ocorrenciaEPIRouter)
 const ocorrenciaCameraRouter = require('./routes/ocorrencia_camera.router.js')
 app.use('/v1/oroscorp/ocorrencia-camera', cors(), ocorrenciaCameraRouter)
 
-
+// IMPORT DO ARQUIVO DE ROTAS SOBRE O SETOR E EPI
+const setorEpiRouter = require('./routes/setor_epi.router.js')
+app.use('/v1/oroscorp/setor-epi', cors(), setorEpiRouter)
 
 // Faz um start na API (Aguardando requisição)
 app.listen(8080, function(){
