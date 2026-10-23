@@ -1,30 +1,32 @@
-module.exports = {
-    development: {
-        // ⚠️ ALTERAÇÃO: Define o cliente como 'mysql2'
+
+
+    module.exports = {
+      development: {
         client: 'mysql2',
         connection: {
-            host: 'localhost',
-            user: 'root', // Substitua pelo seu usuário
-
-            password: 'bcd127', // SENHA DO BANCO DE DADOS NA SALA DE QUALQUER WINDOWS
-
-            // password: '12345678', // SENHA DO BANCO DE DADOS NA SALA DOS MACs
-            database: 'db_oroscorp',
-            port: 3306, // Porta padrão do MySQL
-
-            // Opcional: Define charset (recomendado para UTF8)
-            charset: 'utf8mb4'
+          host: 'localhost',
+          user: 'root',
+          password: 'bcd127',
+          database: 'db_oroscorp',
+          port: 3306,
+          charset: 'utf8mb4'
         },
-
-        // Configurações de Migração
-        migrations: {
-            tableName: 'knex_migrations', // Nome da tabela de migrações
-            directory: './db/migrations'
+        migrations: { tableName: 'knex_migrations', directory: './db/migrations' },
+        seeds: { directory: './db/seeds' }
+      },
+    
+      production: {
+        client: 'mysql2',
+        connection: {
+          host: process.env.DB_HOST,
+          port: Number(process.env.DB_PORT) || 3306,
+          user: process.env.DB_USER,
+          password: process.env.DB_PASSWORD,
+          database: process.env.DB_NAME,
+          charset: 'utf8mb4',
+          ssl: { rejectUnauthorized: false } 
         },
-        seeds: {
-            directory: './db/seeds'
-        }
-    },
-
-    // Você pode adicionar configurações para produção, testes, etc.
+        migrations: { tableName: 'knex_migrations', directory: './db/migrations' },
+        seeds: { directory: './db/seeds' }
+      }
 };

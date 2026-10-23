@@ -8,6 +8,7 @@
 
 require('dotenv').config()
 
+
 // Import das dependencias para criar a API
 const express       = require('express')
 const cors          = require('cors')
